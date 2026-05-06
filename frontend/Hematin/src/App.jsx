@@ -1,7 +1,7 @@
 import {Routes, Route} from 'react-router-dom'
 
 import NavbarComponent from './components/NavbarComponent'
-// import FooterComponent from './components/FooterComponent'
+import FooterComponent from './components/FooterComponent'
 
 import HomePage from './pages/HomePage'
 import FiturePage from './pages/FiturePage'
@@ -20,7 +20,7 @@ function App() {
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/tos" element={<ToSPage />} />
       </Routes>
-      {/* <FooterComponent /> */}
+      <FooterComponent />
     </div>
       )
     }
