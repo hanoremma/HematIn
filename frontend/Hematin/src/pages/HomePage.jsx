@@ -1,4 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom"
 import WalletImage from '../assets/wallet.png'
 
 import {semuaFitur, dataSwiper } from '../data/index'
@@ -15,6 +16,8 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 
 const HomePage = () => {
+    let navigate = useNavigate();
+
   return (<div className="homepage">
     <header className="w-100 min-vh-100 d-flex align-items-center">
     <Container>
@@ -26,7 +29,7 @@ const HomePage = () => {
                 <p className="mb-4">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
-                <button className="btn btn-danger btn-lg rounded-1 me-2 mb-xs-0 mb-2">Lihat Fitur</button>
+                <button className="btn btn-danger btn-lg rounded-1 me-2 mb-xs-0 mb-2" onClick={() => navigate("/fiture")}>Lihat Fitur</button>
                 <Link to="/login" className="btn btn-outline-danger btn-lg rounded-1 me-2 mb-xs-0 mb-2">Get Started</Link>
             </Col>
             <Col lg="6" className="pt-lg-0 pt-5">

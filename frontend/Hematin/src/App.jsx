@@ -2,7 +2,7 @@ import {Routes, Route, useLocation} from 'react-router-dom'
 
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import DashboardPage from './pages/DashboardPage';
+import DashboardPage from './pages/Dashboard/DashboardPage';
 
 import NavbarComponent from './components/NavbarComponent'
 import FooterComponent from './components/FooterComponent'
@@ -28,7 +28,7 @@ function App() {
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/tos" element={<ToSPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/register" element={<RegisterPage />} /> 
         <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
       {!hideLayout && <FooterComponent />}
