@@ -30,7 +30,7 @@ const HomePage = () => {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
                 <button className="btn btn-danger btn-lg rounded-1 me-2 mb-xs-0 mb-2" onClick={() => navigate("/fiture")}>Lihat Fitur</button>
-                <Link to="/login" className="btn btn-outline-danger btn-lg rounded-1 me-2 mb-xs-0 mb-2">Get Started</Link>
+                <Link to="/dashboard" className="btn btn-outline-danger btn-lg rounded-1 me-2 mb-xs-0 mb-2">Get Started</Link>
             </Col>
             <Col lg="6" className="pt-lg-0 pt-5">
                 <img src={WalletImage} alt="wallet-img" />

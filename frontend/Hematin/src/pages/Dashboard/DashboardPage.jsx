@@ -1,19 +1,22 @@
 import { Navigate } from "react-router-dom";
 
 const DashboardPage = () => {
-  const isLogin = localStorage.getItem("isLogin");
+  // const isLogin = localStorage.getItem("isLogin");
 
-  if (!isLogin) {
-    return <Navigate to="/login" />;
-  }
+  // if (!isLogin) {
+  //   return <Navigate to="/login" />;
+  // }
 
   const user = JSON.parse(localStorage.getItem("user"));
 
   return (
-    <div className="container py-5">
+    <div className="dashboard-page">
+
       <h1>Dashboard</h1>
 
-      <h3>Selamat datang, {user?.name}</h3>
+      <h3>
+        Selamat datang, {user?.name}
+      </h3>
 
       <button
         className="btn btn-danger mt-3"
@@ -24,6 +27,7 @@ const DashboardPage = () => {
       >
         Logout
       </button>
+
     </div>
   );
 };
