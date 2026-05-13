@@ -1,30 +1,60 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+
+import {
+  useNavigate,
+  Link,
+} from "react-router-dom";
+
+import AuthInput from "./AuthInput";
+
+import {
+  registerUser,
+} from "../../services/authService";
 
 const RegisterForm = () => {
+
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const [formData, setFormData] =
+    useState({
+      username: "",
+      email_user: "",
+      phone_number: "",
+      password: "",
+    });
 
   const handleChange = (e) => {
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]:
+        e.target.value,
     });
+
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+
     e.preventDefault();
 
-    localStorage.setItem("user", JSON.stringify(formData));
+    try {
 
-    alert("Register berhasil!");
+      await registerUser(formData);
 
-    navigate("/login");
+      alert("Register berhasil!");
+
+      navigate("/login");
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert(
+        error.response?.data?.message ||
+        "Register gagal"
+      );
+
+    }
   };
 
   return (
@@ -33,37 +63,40 @@ const RegisterForm = () => {
       className="p-4 shadow rounded"
       style={{ width: "350px" }}
     >
-      <h2 className="mb-4 text-center">Register</h2>
 
-      <input
+      <h2 className="mb-4 text-center">
+        Register
+      </h2>
+
+      <AuthInput
         type="text"
-        name="name"
-        placeholder="Nama"
-        className="form-control mb-3"
+        name="username"
+        placeholder="Username"
+        value={formData.username}
         onChange={handleChange}
       />
 
-      <input
+      <AuthInput
         type="email"
-        name="email"
+        name="email_user"
         placeholder="Email"
-        className="form-control mb-3"
+        value={formData.email_user}
         onChange={handleChange}
       />
 
-      <input
-        type="nohp"
-        name="nohp"
+      <AuthInput
+        type="text"
+        name="phone_number"
         placeholder="No Telepon"
-        className="form-control mb-3"
+        value={formData.phone_number}
         onChange={handleChange}
       />
 
-      <input
+      <AuthInput
         type="password"
         name="password"
         placeholder="Password"
-        className="form-control mb-3"
+        value={formData.password}
         onChange={handleChange}
       />
 
@@ -72,8 +105,16 @@ const RegisterForm = () => {
       </button>
 
       <p className="text-center m-0">
-        Sudah punya akun? <Link to="/login">Login</Link>
+
+        Sudah punya akun?
+        {" "}
+
+        <Link to="/login">
+          Login
+        </Link>
+
       </p>
+
     </form>
   );
 };

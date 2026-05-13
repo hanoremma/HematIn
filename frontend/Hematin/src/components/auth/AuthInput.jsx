@@ -1,9 +1,21 @@
-const AuthInput = ({ type, placeholder }) => {
+const AuthInput = ({
+  type,
+  name,
+  placeholder,
+  value,
+  onChange,
+  className = "",
+}) => {
   return (
     <input
       type={type}
+      name={name}
       placeholder={placeholder}
-      className="form-control mb-3"
+      value={value}
+      onChange={onChange}
+      required
+      autoComplete="off"
+      className={`form-control mb-3 ${className}`}
     />
   );
 };

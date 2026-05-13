@@ -1,71 +1,96 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import useAuth from "../../hooks/useAuth";
+
+import {
+  loginUser
+} from "../../services/authService";
 
 const LoginForm = () => {
-  const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const { login } = useAuth();
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+  const [formData, setFormData] =
+    useState({
+      email_user: "",
+      password: "",
     });
-  };
 
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
+
     e.preventDefault();
 
-    const user = JSON.parse(localStorage.getItem("user"));
+    try {
 
-    if (
-      user?.email === formData.email &&
-      user?.password === formData.password
-    ) {
-      localStorage.setItem("isLogin", true);
+      const data = await loginUser({
+        email_user: formData.email_user,
+        password: formData.password,
+      });
 
-      alert("Login berhasil!");
+      console.log(data);
 
-      navigate("/dashboard");
-    } else {
-      alert("Email atau password salah!");
+      login(data);
+
+      window.location.href =
+        "/dashboard";
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert(
+        error.response?.data?.message ||
+        "Login gagal"
+      );
+
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="p-4 shadow rounded"
-      style={{ width: "350px" }}
-    >
-      <h2 className="mb-4 text-center">Login</h2>
+    <form onSubmit={handleLogin}>
+
+      <h2>Login</h2>
 
       <input
         type="email"
-        name="email"
         placeholder="Email"
-        className="form-control mb-3"
-        onChange={handleChange}
+        value={formData.email_user}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            email_user: e.target.value
+          })
+        }
       />
 
       <input
         type="password"
-        name="password"
         placeholder="Password"
-        className="form-control mb-3"
-        onChange={handleChange}
+        value={formData.password}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            password: e.target.value
+          })
+        }
       />
 
-      <button className="btn btn-danger w-100 mb-3">
+      <button type="submit">
         Login
       </button>
 
-      <p className="text-center m-0">
-        Belum punya akun? <Link to="/register">Register</Link>
+      <p className="text-center mt-3">
+
+        Belum memiliki akun?
+        {" "}
+
+        <Link to="/register">
+          Daftar
+        </Link>
+
       </p>
+
     </form>
   );
 };
