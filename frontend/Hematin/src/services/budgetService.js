@@ -3,6 +3,13 @@ import axios from "axios";
 const API_URL =
   "http://localhost:3000/budget";
 
+const normalizeBudgets = (data) => {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data?.budgets)) return data.budgets;
+  if (Array.isArray(data?.data)) return data.data;
+  return [];
+};
+
 /* =========================
    GET BUDGET
 ========================= */
@@ -15,7 +22,7 @@ export const getBudgets =
         `${API_URL}/${id_user}`
       );
 
-    return response.data;
+    return normalizeBudgets(response.data);
 
 };
 

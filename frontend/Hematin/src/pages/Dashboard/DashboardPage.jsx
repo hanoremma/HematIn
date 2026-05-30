@@ -22,6 +22,10 @@ import {
   getTransactions
 } from "../../services/transactionService";
 
+import {
+  getWallets
+} from "../../services/walletService";
+
 const DashboardPage = () => {
 
   /* =========================
@@ -33,7 +37,7 @@ const DashboardPage = () => {
   );
 
   /* =========================
-     TRANSACTION STATE
+     STATES
   ========================= */
 
   const [
@@ -41,13 +45,18 @@ const DashboardPage = () => {
     setTransactions
   ] = useState([]);
 
+  const [
+    wallets,
+    setWallets
+  ] = useState([]);
+
   /* =========================
-     FETCH TRANSACTIONS
+     FETCH DATA
   ========================= */
 
   useEffect(() => {
 
-    const fetchTransactions =
+    const fetchData =
       async () => {
 
         try {
@@ -55,12 +64,28 @@ const DashboardPage = () => {
           if (!user?.id_user)
             return;
 
-          const data =
-            await getTransactions(
-              user.id_user
-            );
+          const [
+            transactionData,
+            walletData
+          ] = await Promise.all([
 
-          setTransactions(data);
+            getTransactions(
+              user.id_user
+            ),
+
+            getWallets(
+              user.id_user
+            )
+
+          ]);
+
+          setTransactions(
+            transactionData
+          );
+
+          setWallets(
+            walletData
+          );
 
         } catch (error) {
 
@@ -70,7 +95,7 @@ const DashboardPage = () => {
 
       };
 
-    fetchTransactions();
+    fetchData();
 
   }, [user?.id_user]);
 
@@ -79,15 +104,13 @@ const DashboardPage = () => {
   ========================= */
 
   const latestTransactions =
-    transactions.slice(0,5);
+    transactions.slice(0, 5);
 
   return (
 
     <div className="dashboard-page">
 
-      {/* =========================
-          TOP SECTION
-      ========================= */}
+      {/* TOP SECTION */}
 
       <div className="dashboard-top">
 
@@ -104,25 +127,27 @@ const DashboardPage = () => {
 
       </div>
 
-      {/* =========================
-          STATS
-      ========================= */}
+      {/* STATS */}
 
       <StatsSection
-        transactions={transactions}
+
+        transactions={
+          transactions
+        }
+
+        wallets={
+          wallets
+        }
+
       />
 
-      {/* =========================
-          ANALYTICS
-      ========================= */}
+      {/* ANALYTICS */}
 
       <AnalyticsSection
         transactions={transactions}
       />
 
-      {/* =========================
-          BOTTOM SECTION
-      ========================= */}
+      {/* BOTTOM */}
 
       <BottomSection
         transactions={

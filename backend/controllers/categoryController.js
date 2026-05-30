@@ -47,28 +47,35 @@ const addCategory = async (req, res) => {
 // =========================
 // GET CATEGORY
 // =========================
-const getCategory = async (req, res) => {
+const getCategory =
+  async (req, res) => {
 
-  try {
+    try {
 
-    const { id_user } = req.params
+      const { id_user } =
+        req.params;
 
-    const result =
-      await getCategoryByUser(id_user)
+      const result =
+        await getCategoryByUser(
+          id_user
+        );
 
-    res.json(result.rows)
+      res.json(
+        result.rows
+      );
 
-  } catch (error) {
+    } catch (error) {
 
-    console.log(error)
+      console.log(error);
 
-    res.status(500).json({
-      message: 'Server Error'
-    })
+      res.status(500).json({
+        message:
+        'Server Error'
+      });
 
-  }
+    }
 
-}
+};
 
 // =========================
 // UPDATE CATEGORY

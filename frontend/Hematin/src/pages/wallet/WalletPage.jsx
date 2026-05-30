@@ -230,14 +230,19 @@ const WalletPage = () => {
       {/* HEADER */}
       <div className="transaction-header">
 
-        <div>
+        <div className="wallet-title">
 
-          <h2>💳 Wallets</h2>
+          <i className="bi bi-wallet2"></i>
+
+          <div>
+          <h2>Wallets</h2>
 
           <p>
             Total Balance: Rp{" "}
             {totalBalance.toLocaleString("id-ID")}
           </p>
+
+          </div>
 
         </div>
 

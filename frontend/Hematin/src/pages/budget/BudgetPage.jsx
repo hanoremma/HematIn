@@ -77,9 +77,21 @@ const BudgetPage = () => {
   ========================= */
 
   useEffect(() => {
-    fetchBudgets();
-    fetchCategories();
-  }, [fetchBudgets, fetchCategories]);
+
+  const loadData =
+    async () => {
+
+      await fetchBudgets();
+      await fetchCategories();
+
+    };
+
+  loadData();
+
+}, [
+  fetchBudgets,
+  fetchCategories
+]);
 
   /* =========================
      HANDLE CHANGE
@@ -180,9 +192,19 @@ const BudgetPage = () => {
 
       {/* HEADER */}
       <div className="transaction-header">
-        <div>
+
+        <div className="budget-title">
+
+          <i className="bi bi-piggy-bank"></i>
+
+          <div>
+
           <h2>Budgets</h2>
+
           <p>Kelola budget keuangan</p>
+
+          </div>
+
         </div>
 
         <button

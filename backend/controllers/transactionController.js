@@ -460,32 +460,32 @@ const editTransaction =
       );
 
       for (const [
-        walletId,
-        delta
-      ] of balanceChanges) {
+  walletId,
+  delta
+] of balanceChanges) {
 
-        if (
-          transaction.transaction_type ===
-          INCOME_TYPE
-          &&
-          walletMap.get(transaction.id_wallet) +
-          rollbackDelta <
-          0
-        ) {
+  const currentBalance =
+    walletMap.get(walletId);
 
-          await client.query('ROLLBACK');
+  if (
+    currentBalance + delta < 0
+  ) {
 
-          return res.status(400)
-            .json({
+    await client.query(
+      'ROLLBACK'
+    );
 
-              message:
-                'Saldo wallet tidak cukup'
+    return res.status(400)
+      .json({
 
-            });
+        message:
+          'Saldo wallet tidak cukup'
 
-        }
+      });
 
-      }
+  }
+
+}
 
       for (const [
         walletId,

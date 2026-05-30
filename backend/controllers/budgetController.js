@@ -108,6 +108,7 @@ const editBudget = async (req, res) => {
 
     const {
 
+      id_category,
       amount_limit,
       start_date,
       end_date,
@@ -128,6 +129,7 @@ const editBudget = async (req, res) => {
     await updateBudget(
 
       id_budget,
+      id_category,
       amount_limit,
       start_date,
       end_date,

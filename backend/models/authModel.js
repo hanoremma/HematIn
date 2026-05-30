@@ -30,6 +30,8 @@ const createUser = async (
       phone_number
     )
     VALUES ($1, $2, $3, $4)
+
+    RETURNING *
     `,
     [
       username,
@@ -37,7 +39,7 @@ const createUser = async (
       password,
       phone_number
     ]
-  )
+  );
 
 }
 

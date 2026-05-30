@@ -4,6 +4,9 @@ const router = express.Router()
 
 const multer = require('multer')
 
+const verifyToken =
+  require('../middleware/authMiddleware');
+
 const {
 
   addTransactionImage,
@@ -29,6 +32,7 @@ router.post(
 
   upload.single('image'),
 
+  verifyToken,
   addTransactionImage
 
 )
@@ -40,6 +44,7 @@ router.get(
 
   '/:id_transaction',
 
+  verifyToken,
   getImage
 
 )

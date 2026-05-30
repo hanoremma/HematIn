@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Modal from "../../ui/Modal";
 
@@ -11,16 +11,27 @@ import BudgetForm from "../../budget/BudgetForm";
 // API
 import { addTransaction } from "../../../services/transactionService";
 
+import {
+  getCategories
+} from "../../../services/categoryService";
+
+import {
+  getWallets
+} from "../../../services/walletService";
+
+import {addBudget } from "../../../services/budgetService";
+
 const DashboardActions = () => {
   /* =========================
      MODAL STATE
   ========================= */
 
   const [showTransaction, setShowTransaction] = useState(false);
-
   const [showBudget, setShowBudget] = useState(false);
-
   const [showReceipt, setShowReceipt] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [wallets, setWallets] = useState([]);
+  
 
   /* =========================
      USER LOGIN
@@ -29,6 +40,65 @@ const DashboardActions = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   console.log("USER LOGIN:", user);
+
+  /* =========================
+   FETCH DATA
+========================= */
+
+useEffect(() => {
+
+  const fetchData =
+    async () => {
+
+      try {
+
+        /* CATEGORY */
+
+        const categoryData =
+          await getCategories(
+            user.id_user
+          );
+
+        console.log(
+          "CATEGORY DATA:",
+          categoryData
+        );
+
+        setCategories(
+          categoryData
+        );
+
+        /* WALLET */
+
+        const walletData =
+          await getWallets(
+            user.id_user
+          );
+
+        console.log(
+          "WALLET DATA:",
+          walletData
+        );
+
+        setWallets(
+          walletData
+        );
+
+      } catch (error) {
+
+        console.log(error);
+
+      }
+
+    };
+
+  if (user?.id_user) {
+
+    fetchData();
+
+  }
+
+}, [user?.id_user]);
 
   /* =========================
      TRANSACTION STATE
@@ -190,16 +260,95 @@ const DashboardActions = () => {
      SUBMIT BUDGET
   ========================= */
 
-  const handleBudgetSubmit = (e) => {
+  const handleBudgetSubmit =
+  async (e) => {
+
     e.preventDefault();
 
-    console.log(budgetData);
+    try {
 
-    alert("Budget Saved!");
+      const payload = {
 
-    setShowBudget(false);
-  };
+        id_user:
+          user.id_user,
 
+        id_category:
+          budgetData.category,
+
+        amount_limit:
+          Number(
+            budgetData.amountLimit
+          ),
+
+        start_date:
+          budgetData.startDate,
+
+        end_date:
+          budgetData.endDate,
+
+        budget_type:
+          budgetData.budgetType,
+
+        description_budget:
+          budgetData.descriptionBudget
+
+      };
+
+      console.log(
+        "BUDGET PAYLOAD:",
+        payload
+      );
+
+      await addBudget(
+        payload
+      );
+
+      alert(
+        "Budget Saved!"
+      );
+
+      setShowBudget(false);
+
+      /* RESET */
+
+      setBudgetData({
+
+        budgetType:
+          "Pengeluaran",
+
+        descriptionBudget:
+          "",
+
+        category:
+          "",
+
+        amountLimit:
+          "",
+
+        startDate:
+          "",
+
+        endDate:
+          "",
+
+      });
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert(
+
+        error?.response?.data?.message
+        ||
+
+        "Gagal tambah budget"
+
+      );
+
+    }
+
+};
   return (
     <>
       {/* =========================
@@ -213,10 +362,13 @@ const DashboardActions = () => {
         </button>
 
         {/* RECEIPT */}
-        <button className="scan-btn" onClick={() => setShowReceipt(true)}>
-          📷 Scan Struk
-        </button>
-
+        <button
+  className="scan-btn"
+  onClick={() => setShowReceipt(true)}
+>
+  <i className="bi bi-receipt"></i>
+  <span>Scan Struk</span>
+</button>
         {/* BUDGET */}
         <button onClick={() => setShowBudget(true)}>+ Tambah Budget</button>
       </div>
@@ -228,6 +380,8 @@ const DashboardActions = () => {
       <Modal show={showTransaction} onClose={() => setShowTransaction(false)}>
         <TransactionForm
           formData={transactionData}
+          wallets={wallets}
+          categories={categories}
           handleChange={handleTransactionChange}
           handleTypeChange={handleTypeChange}
           handleSubmit={handleTransactionSubmit}
@@ -241,6 +395,7 @@ const DashboardActions = () => {
       <Modal show={showBudget} onClose={() => setShowBudget(false)}>
         <BudgetForm
           formData={budgetData}
+          categories={categories}
           handleChange={handleBudgetChange}
           handleTypeChange={handleBudgetTypeChange}
           handleSubmit={handleBudgetSubmit}

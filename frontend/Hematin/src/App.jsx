@@ -18,6 +18,9 @@ import AddBudgetPage from "./pages/budget/AddBudgetPage";
 import TransactionPage from "./pages/transaction/TransactionPage";
 import WalletPage from "./pages/wallet/WalletPage";
 import BudgetPage from "./pages/budget/BudgetPage";
+import CategoriesPage from "./pages/category/CategoriesPage";
+import AddCategoryPage from "./pages/category/AddCategoryPage";
+
 
 function App() {
   return (
@@ -46,6 +49,8 @@ function App() {
         <Route path="/budgets/add" element={<AddBudgetPage />}/>
         <Route path="/transactions" element={<TransactionPage />}/>
         <Route path="/budgets" element={<BudgetPage />}/>
+        <Route path="/categories" element={<CategoriesPage />}/>
+        <Route path="/categories/add" element={<AddCategoryPage />}/>
 
       </Route>
 

@@ -5,6 +5,7 @@ const pool = require('../config/db')
 // =========================
 const createTransactionImage = async (
 
+  id_user,
   id_transaction,
   img_nota,
   status
@@ -16,17 +17,19 @@ const createTransactionImage = async (
     `
     INSERT INTO transaction_img
     (
+      id_user,
       id_transaction,
       img_nota,
       status
     )
 
-    VALUES ($1,$2,$3)
+    VALUES ($1,$2,$3,$4)
 
     RETURNING *
     `,
 
     [
+      id_user,
       id_transaction,
       img_nota,
       status

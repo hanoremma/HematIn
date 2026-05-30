@@ -4,137 +4,286 @@ from "../transaction/TransactionTypeToggle";
 import "../../dist/css/Transaction.css";
 
 const BudgetForm = ({
+
   formData,
+
   categories = [],
+
   handleChange,
+
   handleTypeChange,
+
   handleSubmit,
+
   isEditing = false,
+
 }) => {
 
+  console.log(
+    "FORM CATEGORY:",
+    categories
+  );
+
   return (
+
     <form
       className="budget-form"
       onSubmit={handleSubmit}
     >
 
-      <h2 className="form-title">
-        {isEditing ? "Edit Budget" : "Add Budget"}
-      </h2>
-
-      {/* TYPE */}
-
-      <div className="form-group">
-
-        <label>Budget Type</label>
-
-        <TransactionTypeToggle
-          value={formData.budgetType}
-          onChange={handleTypeChange}
-        />
-
-      </div>
-
       {/* TITLE */}
 
+      <h2 className="form-title">
+
+        {
+          isEditing
+
+            ? "Edit Budget"
+
+            : "Add Budget"
+        }
+
+      </h2>
+
+      {/* =========================
+         BUDGET TYPE
+      ========================= */}
+
       <div className="form-group">
 
-        <label>Budget Title</label>
+        <label>
+          Budget Type
+        </label>
 
-        <input
-          type="text"
-          name="descriptionBudget"
-          placeholder="Enter budget title"
-          value={formData.descriptionBudget}
-          onChange={handleChange}
+        <TransactionTypeToggle
+
+          value={
+            formData.budgetType
+          }
+
+          onChange={
+            handleTypeChange
+          }
+
         />
 
       </div>
 
-      {/* CATEGORY */}
+      {/* =========================
+         BUDGET TITLE
+      ========================= */}
 
       <div className="form-group">
 
-        <label>Category</label>
+        <label>
+          Budget Title
+        </label>
+
+        <input
+
+          type="text"
+
+          name="descriptionBudget"
+
+          placeholder="
+          Enter budget title
+          "
+
+          value={
+            formData
+            .descriptionBudget
+          }
+
+          onChange={
+            handleChange
+          }
+
+          required
+
+        />
+
+      </div>
+
+      {/* =========================
+         CATEGORY
+      ========================= */}
+
+      <div className="form-group">
+
+        <label>
+          Category
+        </label>
 
         <select
+
           name="category"
           value={formData.category}
           onChange={handleChange}
+
+          required
+
         >
 
           <option value="">
+
             Select Category
+
           </option>
 
-          {categories.map((cat) => (
-            <option
-              key={cat.id_category}
-              value={cat.id_category}
-            >
-              {cat.category_name}
-            </option>
-          ))}
+          {
+            categories.map(
+              (cat) => (
+
+              <option
+
+                key={
+                  cat.id_category
+                }
+
+                value={
+                  cat.id_category
+                }
+
+              >
+
+                {
+                  cat.category_name
+                }
+
+              </option>
+
+            ))
+          }
 
         </select>
 
       </div>
 
-      {/* LIMIT */}
+      {/* =========================
+         LIMIT
+      ========================= */}
 
       <div className="form-group">
 
-        <label>Amount Limit</label>
+        <label>
+          Amount Limit
+        </label>
 
         <input
+
           type="number"
+
           name="amountLimit"
-          placeholder="Enter amount limit"
-          value={formData.amountLimit}
-          onChange={handleChange}
+
+          placeholder="
+          Enter amount limit
+          "
+
+          value={
+            formData.amountLimit
+          }
+
+          onChange={
+            handleChange
+          }
+
+          min="0"
+
+          required
+
         />
 
       </div>
 
-      {/* START DATE */}
+      {/* =========================
+         START DATE
+      ========================= */}
 
       <div className="form-group">
 
-        <label>Start Date</label>
+        <label>
+          Start Date
+        </label>
 
         <input
+
           type="date"
+
           name="startDate"
-          value={formData.startDate}
-          onChange={handleChange}
+
+          value={
+            formData.startDate
+          }
+
+          onChange={
+            handleChange
+          }
+
+          required
+
         />
 
       </div>
 
-      {/* END DATE */}
+      {/* =========================
+         END DATE
+      ========================= */}
 
       <div className="form-group">
 
-        <label>End Date</label>
+        <label>
+          End Date
+        </label>
 
         <input
+
           type="date"
+
           name="endDate"
-          value={formData.endDate}
-          onChange={handleChange}
+
+          value={
+            formData.endDate
+          }
+
+          onChange={
+            handleChange
+          }
+
+          required
+
         />
 
       </div>
 
-      {/* SUBMIT */}
+      {/* =========================
+         WARNING
+      ========================= */}
 
+      <div className="budget-info">
+
+        <p>
+
+          ℹ Budget hanya
+          memberikan peringatan
+          ketika limit terlampaui.
+
+        </p>
+
+      </div>
+
+      {/* =========================
+         SUBMIT
+      ========================= */}
       <button
         type="submit"
         className="submit-btn"
       >
-        {isEditing ? "Update Budget" : "Save Budget"}
+        {
+          isEditing
+            ? "Update Budget"
+            : "Save Budget"
+        }
       </button>
-
     </form>
   );
 };

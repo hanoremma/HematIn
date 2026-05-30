@@ -34,23 +34,23 @@ const createCategory = async (
 // =========================
 // GET CATEGORY
 // =========================
-const getCategoryByUser = async (id_user) => {
+const getCategoryByUser =
+  async (id_user) => {
 
-  return await pool.query(
+    return await pool.query(
 
-    `
-    SELECT *
-    FROM category
-    WHERE id_user = $1
-    ORDER BY category_name ASC
-    `,
+      `
+      SELECT *
+      FROM category
+      WHERE id_user = $1
+      ORDER BY category_name ASC
+      `,
 
-    [id_user]
+      [id_user]
 
-  )
+    );
 
-}
-
+};
 // =========================
 // UPDATE CATEGORY
 // =========================

@@ -1,22 +1,38 @@
 const TYPE_ICON = {
-  Cash: "💵",
-  Bank: "🏦",
-  "E-Wallet": "📱",
-  "Credit Card": "💳",
-  Investment: "📈",
-  Other: "🪙",
+  Cash: "bi-cash-stack",
+  Bank: "bi-bank",
+  "E-Wallet": "bi-phone",
+  "Credit Card": "bi-credit-card",
+  Investment: "bi-graph-up-arrow",
+  Other: "bi-wallet2",
 };
 
-const WalletCard = ({ wallet, onEdit, onDelete }) => {
+const WalletCard = ({
+  wallet,
+  onEdit,
+  onDelete
+}) => {
 
   return (
+
     <div className="wallet-card">
 
       {/* ICON & NAME */}
       <div className="wallet-card-header">
 
-        <span className="wallet-card-icon">
-          {TYPE_ICON[wallet.wallet_type] ?? "🪙"}
+        <span className={`wallet-card-icon ${wallet.wallet_type}`}>
+
+          <i
+            className={
+              `bi ${
+                TYPE_ICON[
+                  wallet.wallet_type
+                ] ??
+                "bi-wallet2"
+              }`
+            }
+          ></i>
+
         </span>
 
         <div>
@@ -35,7 +51,15 @@ const WalletCard = ({ wallet, onEdit, onDelete }) => {
 
       {/* BALANCE */}
       <p className="wallet-card-balance">
-        Rp {Number(wallet.balance).toLocaleString("id-ID")}
+
+        Rp {
+          Number(
+            wallet.balance
+          ).toLocaleString(
+            "id-ID"
+          )
+        }
+
       </p>
 
       {/* ACTIONS */}
@@ -43,14 +67,20 @@ const WalletCard = ({ wallet, onEdit, onDelete }) => {
 
         <button
           className="edit-btn"
-          onClick={() => onEdit(wallet)}
+          onClick={() =>
+            onEdit(wallet)
+          }
         >
           Edit
         </button>
 
         <button
           className="delete-btn"
-          onClick={() => onDelete(wallet.id_wallet)}
+          onClick={() =>
+            onDelete(
+              wallet.id_wallet
+            )
+          }
         >
           Delete
         </button>
@@ -58,6 +88,7 @@ const WalletCard = ({ wallet, onEdit, onDelete }) => {
       </div>
 
     </div>
+
   );
 
 };

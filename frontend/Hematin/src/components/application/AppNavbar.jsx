@@ -1,37 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Offcanvas } from "react-bootstrap";
 
 import AppSidebar from "./AppSidebar";
-
-import SearchBox from "./SearchBox";
-import NotificationButton from "./NotificationButton";
 import ProfileMenu from "./ProfileMenu";
+import ThemeToggle from "./ThemeToggleButton";
 
 const AppNavbar = () => {
 
   const [show, setShow] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
-  const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setShowSearch(false);
-      }
-    };
-    window.addEventListener(
-      "resize",
-      handleResize
-    );
-    
-    return () => {
-      
-      window.removeEventListener(
-        "resize",
-        handleResize
-      );
-    };
-  }, []);
 
   return (
     <>
@@ -49,39 +25,16 @@ const AppNavbar = () => {
 
         </div>
 
-        {/* DESKTOP SEARCH */}
-        <SearchBox placeholder="Cari transaksi..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        />
-
         {/* RIGHT */}
         <div className="navbar-right">
 
-          {/* MOBILE SEARCH */}
-          <button
-            className="search-mobile-btn"
-            onClick={() => setShowSearch(!showSearch)}
-          >
-            🔍
-          </button>
-
-          <NotificationButton />
+          <ThemeToggle />
 
           <ProfileMenu />
 
         </div>
 
       </header>
-
-      {/* MOBILE SEARCH */}
-      {showSearch && (
-        <SearchBox placeholder= "Cari transaksi..."
-        mobile={true}
-        value={search}
-        onChange={(e)=> setSearch(e.target.value)}
-        />
-      )}
 
       {/* MOBILE SIDEBAR */}
       <Offcanvas
@@ -107,6 +60,7 @@ const AppNavbar = () => {
       </Offcanvas>
     </>
   );
+
 };
 
 export default AppNavbar;

@@ -7,6 +7,7 @@ const TransactionTable = ({
 }) => {
 
   return (
+    <div className="transaction-table-wrapper">
     <table className="transaction-table">
 
       <thead>
@@ -118,6 +119,7 @@ const TransactionTable = ({
       </tbody>
 
     </table>
+    </div>
   );
 };
 

@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import "../../dist/css/Transaction.css";
 
 import Modal from "../../components/ui/Modal";
 
@@ -398,17 +399,21 @@ const handleDelete =
 
       <div className="transaction-header">
 
-        <div>
+        <div className="transaction-header-left">
 
-          <h2>
-            Transactions
-          </h2>
+  <div className="transaction-title">
 
-          <p>
-            Kelola transaksi keuangan
-          </p>
+    <i className="bi bi-receipt"></i>
 
-        </div>
+    <h2>Transactions</h2>
+
+  </div>
+
+  <p className="transaction-subtitle">
+    Kelola transaksi keuangan
+  </p>
+
+</div>
 
         {/* ACTION BUTTON */}
 
@@ -429,7 +434,8 @@ const handleDelete =
               setShowReceipt(true)
             }
           >
-            📷 Scan Struk
+            <i className="bi bi-receipt-cutoff"></i>
+  <span>Scan Struk</span>
           </button>
 
         </div>

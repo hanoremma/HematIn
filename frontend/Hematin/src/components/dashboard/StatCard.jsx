@@ -1,22 +1,28 @@
 const StatCard = ({
   title,
   amount,
-  type,
+  icon,
+  iconClass
 }) => {
 
   return (
+
     <div className="stat-card">
 
-      <div className="stat-top">
-        <span>{type}</span>
+      <div
+        className={`stat-icon ${iconClass}`}
+      >
+        <i className={icon}></i>
       </div>
 
-      <h5>{title}</h5>
+      <h3>{title}</h3>
 
-      <h3>{amount}</h3>
+      <h2>{amount}</h2>
 
     </div>
+
   );
+
 };
 
 export default StatCard;

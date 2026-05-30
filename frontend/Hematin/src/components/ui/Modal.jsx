@@ -8,6 +8,7 @@ const Modal = ({
   if (!show) return null;
 
   return (
+
     <div className="custom-modal-overlay">
 
       <div className="custom-modal">
@@ -18,8 +19,11 @@ const Modal = ({
 
             <h4>{title}</h4>
 
-            <button onClick={onClose}>
-              ✖
+            <button
+              className="modal-close-btn"
+              onClick={onClose}
+            >
+              <i className="bi bi-x-lg" />
             </button>
 
           </div>
@@ -33,7 +37,9 @@ const Modal = ({
       </div>
 
     </div>
+
   );
+
 };
 
 export default Modal;

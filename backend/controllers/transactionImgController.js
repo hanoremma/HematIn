@@ -17,10 +17,21 @@ const addTransactionImage = async (req, res) => {
     const file = req.file
 
 const {
-
   id_transaction = null
+} = req.body;
 
-} = req.body
+const id_user =
+  req.user.id_user;
+
+if (!id_user) {
+
+  return res.status(400).json({
+
+    message: 'id_user wajib dikirim'
+
+  })
+
+}
 
 // VALIDASI FILE
 if (!file) {
@@ -95,6 +106,7 @@ if (!file) {
 
       await createTransactionImage(
 
+        id_user,
         id_transaction,
 
         fileName,

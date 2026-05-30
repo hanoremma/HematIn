@@ -3,6 +3,9 @@ import { Container, Nav, Navbar } from 'react-bootstrap'
 
 import {navLinks} from '../data/index'
 import { NavLink } from 'react-router-dom'
+import ThemeToggle
+from "./application/ThemeToggleButton";
+
 
 const NavbarComponent = () => {
     const [changeColor, setChangeColor] = useState(false);
@@ -42,9 +45,15 @@ const NavbarComponent = () => {
             })}
           </Nav>
 
-          <div className = "text-center">
-            <NavLink to="register" className="btn btn-outline-danger rounded-1">Join With Us</NavLink>
-          </div>
+          <div className="landing-navbar-actions">
+            <ThemeToggle />
+            <NavLink
+            to="/register"
+            className="btn btn-outline-danger rounded-1"
+            >
+              Join With Us
+              </NavLink>
+              </div>
         </Navbar.Collapse>
       </Container>
     </Navbar></div>
