@@ -1,42 +1,43 @@
 import StatCard from "../StatCard";
 
 const StatsSection = ({
-  transactions = [],
-  wallets = []
+  dashboard
 }) => {
 
-  const totalIncome =
-    transactions
-      .filter(
-        t =>
-          t.transaction_type ===
-          "Pemasukan"
-      )
-      .reduce(
-        (sum, t) =>
-          sum + Number(t.amount),
-        0
-      );
+  const summary =
+    dashboard?.data ||
+    dashboard?.dashboard ||
+    dashboard?.summary ||
+    dashboard ||
+    {};
 
-  const totalExpense =
-    transactions
-      .filter(
-        t =>
-          t.transaction_type ===
-          "Pengeluaran"
-      )
-      .reduce(
-        (sum, t) =>
-          sum + Number(t.amount),
-        0
-      );
+  const parseAmount = (value) => {
+
+    const amount =
+      Number(value);
+
+    return Number.isFinite(amount)
+      ? amount
+      : 0;
+
+  };
 
   const totalBalance =
-    wallets.reduce(
-      (sum, wallet) =>
-        sum +
-        Number(wallet.balance),
-      0
+    parseAmount(
+      summary.total_balance ??
+      summary.totalBalance
+    );
+
+  const totalIncome =
+    parseAmount(
+      summary.total_income ??
+      summary.totalIncome
+    );
+
+  const totalExpense =
+    parseAmount(
+      summary.total_expense ??
+      summary.totalExpense
     );
 
   return (
@@ -44,25 +45,25 @@ const StatsSection = ({
     <div className="stats-section">
 
       <StatCard
-  title="Total Saldo"
-  amount={`Rp ${totalBalance.toLocaleString("id-ID")}`}
-  icon="bi bi-wallet2"
-  iconClass="balance-icon"
-/>
+        title="Total Saldo"
+        amount={`Rp ${totalBalance.toLocaleString("id-ID")}`}
+        icon="bi bi-wallet2"
+        iconClass="balance-icon"
+      />
 
-<StatCard
-  title="Total Pemasukan"
-  amount={`Rp ${totalIncome.toLocaleString("id-ID")}`}
-  icon="bi bi-graph-up-arrow"
-  iconClass="income-icon"
-/>
+      <StatCard
+        title="Total Pemasukan"
+        amount={`Rp ${totalIncome.toLocaleString("id-ID")}`}
+        icon="bi bi-graph-up-arrow"
+        iconClass="income-icon"
+      />
 
-<StatCard
-  title="Total Pengeluaran"
-  amount={`Rp ${totalExpense.toLocaleString("id-ID")}`}
-  icon="bi bi-graph-down-arrow"
-  iconClass="expense-icon"
-/>
+      <StatCard
+        title="Total Pengeluaran"
+        amount={`Rp ${totalExpense.toLocaleString("id-ID")}`}
+        icon="bi bi-graph-down-arrow"
+        iconClass="expense-icon"
+      />
 
     </div>
 

@@ -1,9 +1,11 @@
 const supabase = require('../config/supabase')
+const axios = require("axios");
 
 const {
 
   createTransactionImage,
-  getTransactionImage
+  getTransactionImage,
+  updateTransactionImageStatus
 
 } = require('../models/transactionImgModel')
 
@@ -108,12 +110,54 @@ if (!file) {
 
         id_user,
         id_transaction,
-
         fileName,
-
         'uploaded'
 
       )
+
+      await updateTransactionImageStatus(
+        result.rows[0].id_transaction_img,
+        'pending'
+      );
+
+      try{
+
+      console.log("=== REQUEST KE FASTAPI ===");
+      
+      const ocrResponse = await axios.post(
+        "http://localhost:8000/api/v1/predict",
+        {
+          file_url: signedUrlData.signedUrl,
+
+          job_id:result.rows[0].id_transaction_img,
+          
+          mime_type:file.mimetype
+        },
+        {
+          headers: {
+            "x-api-key":process.env.AI_SERVICE_API_KEY
+          }
+        }
+      
+      );
+      console.log("=== RESPONSE FASTAPI ===");
+      console.log(ocrResponse.data);
+
+      await updateTransactionImageStatus(
+        result.rows[0].id_transaction_img,
+        'success'
+      );
+
+    } catch (error) {
+      await updateTransactionImageStatus(
+        result.rows[0].id_transaction_img,
+        'failed'
+      );
+      console.log("FASTAPI ERROR");
+      console.log(error.response?.status);
+      console.log(error.response?.data);
+      throw error;
+    }
 
     res.json({
 

@@ -65,9 +65,29 @@ const getTransactionImage = async (
 
 }
 
+const updateTransactionImageStatus = async (
+  id_transaction_img,
+  status
+) => {
+
+  return await pool.query(
+    `
+    UPDATE transaction_img
+    SET status = $1
+    WHERE id_transaction_img = $2
+    `,
+    [
+      status,
+      id_transaction_img
+    ]
+  );
+
+}
+
 module.exports = {
 
   createTransactionImage,
-  getTransactionImage
+  getTransactionImage,
+  updateTransactionImageStatus
 
 }

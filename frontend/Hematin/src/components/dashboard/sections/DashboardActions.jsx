@@ -9,7 +9,10 @@ import ReceiptModal from "../../receipt/ReceiptModal";
 import BudgetForm from "../../budget/BudgetForm";
 
 // API
-import { addTransaction } from "../../../services/transactionService";
+import {
+  addTransaction,
+  getTransactions
+} from "../../../services/transactionService";
 
 import {
   getCategories
@@ -19,9 +22,12 @@ import {
   getWallets
 } from "../../../services/walletService";
 
-import {addBudget } from "../../../services/budgetService";
+import { addBudget } from "../../../services/budgetService";
 
-const DashboardActions = () => {
+const DashboardActions = ({
+  setTransactions,
+  refreshDashboard
+}) => {
   /* =========================
      MODAL STATE
   ========================= */
@@ -203,6 +209,17 @@ useEffect(() => {
 
       // API
       await addTransaction(payload);
+
+      const latestTransactions =
+        await getTransactions(
+          user.id_user
+        );
+
+      setTransactions?.(
+        latestTransactions
+      );
+
+      await refreshDashboard?.();
 
       alert("Transaction Saved!");
 

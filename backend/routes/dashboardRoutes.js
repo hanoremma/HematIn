@@ -1,14 +1,28 @@
-const express = require('express')
+const express = require('express');
 
-const router = express.Router()
+const router = express.Router();
 
 const {
 
+  getDashboard,
+  getAnalytics
+
+} = require('../controllers/dashboardController');
+
+// =========================
+// ANALYTICS
+// =========================
+router.get(
+  '/analytics/:id_user',
+  getAnalytics
+);
+
+// =========================
+// DASHBOARD SUMMARY
+// =========================
+router.get(
+  '/:id_user',
   getDashboard
+);
 
-} = require('../controllers/dashboardController')
-
-// GET DASHBOARD
-router.get('/:id_user', getDashboard)
-
-module.exports = router
+module.exports = router;

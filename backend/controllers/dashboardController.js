@@ -5,6 +5,14 @@ const {
     getTotalExpense
   
   } = require('../models/dashboardModel')
+
+  const {
+
+  getExpenseByCategory,
+  getMonthlyAnalytics,
+  getWeeklyExpense
+
+} = require('../models/dashboardModel')
   
   // =========================
   // GET DASHBOARD
@@ -60,9 +68,50 @@ const {
     }
   
   }
+
+  const getAnalytics = async (req, res) => {
+
+  try {
+
+    const { id_user } = req.params
+
+    const categories =
+      await getExpenseByCategory(id_user)
+
+    const monthly =
+      await getMonthlyAnalytics(id_user)
+
+    const weekly =
+      await getWeeklyExpense(id_user)
+
+    res.json({
+
+      categories:
+        categories.rows,
+
+      monthly:
+        monthly.rows,
+
+      weekly:
+        weekly.rows
+
+    })
+
+  } catch (error) {
+
+    console.log(error)
+
+    res.status(500).json({
+      message: 'Server Error'
+    })
+
+  }
+
+}
   
   module.exports = {
   
-    getDashboard
+    getDashboard,
+    getAnalytics
   
   }

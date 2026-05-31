@@ -23,8 +23,9 @@ import {
 } from "../../services/transactionService";
 
 import {
-  getWallets
-} from "../../services/walletService";
+  getDashboard,
+  getDashboardAnalytics
+} from "../../services/dashboardService";
 
 const DashboardPage = () => {
 
@@ -45,10 +46,22 @@ const DashboardPage = () => {
     setTransactions
   ] = useState([]);
 
+
   const [
-    wallets,
-    setWallets
-  ] = useState([]);
+    dashboard,
+    setDashboard
+  ] = useState(null);
+
+  const [
+    analytics,
+    setAnalytics
+  ] = useState({
+
+    categories: [],
+    monthly: [],
+    weekly: []
+
+  });
 
   /* =========================
      FETCH DATA
@@ -65,26 +78,68 @@ const DashboardPage = () => {
             return;
 
           const [
-            transactionData,
-            walletData
-          ] = await Promise.all([
+
+            transactionResult,
+            dashboardResult,
+            analyticsResult
+
+          ] = await Promise.allSettled([
 
             getTransactions(
               user.id_user
             ),
 
-            getWallets(
+            getDashboard(
+              user.id_user
+            ),
+
+            getDashboardAnalytics(
               user.id_user
             )
 
           ]);
 
+          const transactionData =
+            transactionResult.status === "fulfilled"
+              ? transactionResult.value
+              : [];
+
+          const dashboardData =
+            dashboardResult.status === "fulfilled"
+              ? dashboardResult.value
+              : null;
+
+          const analyticsData =
+            analyticsResult.status === "fulfilled"
+              ? analyticsResult.value
+              : {
+
+                categories: [],
+                monthly: [],
+                weekly: []
+
+              };
+
+          if (
+            analyticsResult.status === "rejected"
+          ) {
+
+            console.log(
+              analyticsResult.reason
+            );
+
+          }
+
           setTransactions(
             transactionData
           );
 
-          setWallets(
-            walletData
+          setDashboard(
+            dashboardData
+          );
+
+          setAnalytics(
+            analyticsData
           );
 
         } catch (error) {
@@ -106,6 +161,23 @@ const DashboardPage = () => {
   const latestTransactions =
     transactions.slice(0, 5);
 
+  const refreshDashboard =
+    async () => {
+
+      if (!user?.id_user)
+        return;
+
+      const dashboardData =
+        await getDashboard(
+          user.id_user
+        );
+
+      setDashboard(
+        dashboardData
+      );
+
+    };
+
   return (
 
     <div className="dashboard-page">
@@ -123,6 +195,9 @@ const DashboardPage = () => {
           setTransactions={
             setTransactions
           }
+          refreshDashboard={
+            refreshDashboard
+          }
         />
 
       </div>
@@ -130,21 +205,13 @@ const DashboardPage = () => {
       {/* STATS */}
 
       <StatsSection
-
-        transactions={
-          transactions
-        }
-
-        wallets={
-          wallets
-        }
-
+        dashboard={dashboard}
       />
 
       {/* ANALYTICS */}
 
       <AnalyticsSection
-        transactions={transactions}
+        analytics={analytics}
       />
 
       {/* BOTTOM */}
