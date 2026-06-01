@@ -1,16 +1,27 @@
 import FinanceChart from "../FinanceChart";
 import BudgetCard from "../BudgetCard";
 
-const AnalyticsSection = () => {
+const AnalyticsSection = ({
+  analytics,
+  budgets
+}) => {
+
   return (
+
     <div className="analytics-section">
 
-      <FinanceChart />
+      <FinanceChart
+        analytics={analytics}
+      />
 
-      <BudgetCard />
+      <BudgetCard
+        budgets={budgets}
+      />
 
     </div>
+
   );
+
 };
 
 export default AnalyticsSection;

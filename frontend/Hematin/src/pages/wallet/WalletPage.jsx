@@ -250,7 +250,7 @@ const WalletPage = () => {
           className="add-btn"
           onClick={handleOpenAdd}
         >
-          + Add Wallet
+          + Tambah Wallet
         </button>
 
       </div>
@@ -285,7 +285,7 @@ const WalletPage = () => {
       <Modal
         show={showModal}
         onClose={handleCloseModal}
-        title={isEdit ? "Edit Wallet" : "Add Wallet"}
+        title=''
       >
 
         <WalletForm

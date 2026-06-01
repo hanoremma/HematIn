@@ -1,7 +1,7 @@
 import TransactionList from "../TransactionList";
 import FinanceTipsCard from "../FinanceTipsCard";
 
-const BottomSection = ({ transactions }) => {
+const BottomSection = ({ transactions}) => {
   return (
     <div className="bottom-section">
 

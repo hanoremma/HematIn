@@ -1,31 +1,102 @@
 const BudgetItem = ({
   title,
-  used,
-  limit,
-  percent,
+  used = 0,
+  limit = 0,
 }) => {
-  return (
-    <div className="budget-item">
 
-      <div className="budget-info">
+  const usedAmount =
+    Number(used);
+
+  const limitAmount =
+    Number(limit);
+
+  const percent =
+    limitAmount > 0
+      ? Math.round(
+          (usedAmount /
+            limitAmount) * 100
+        )
+      : 0;
+
+  const progressWidth =
+    Math.min(percent, 100);
+
+  const remaining =
+    limitAmount - usedAmount;
+
+  const status =
+  percent > 100
+    ? "Over Budget"
+    : "Aman";
+
+const statusClass =
+  percent > 100
+    ? "danger"
+    : "safe";
+
+  return (
+
+    <div className="dashboard-budget-item">
+
+      <div className="dashboard-budget-info">
+
         <h6>{title}</h6>
 
-        <span>{percent}%</span>
+        <span>
+          {percent}%
+        </span>
+
       </div>
 
-      <div className="budget-bar">
+      <div className="dashboard-budget-bar">
+
         <div
-          className="budget-progress"
-          style={{ width: `${percent}%` }}
-        ></div>
+          className={`dashboard-budget-progress ${statusClass}`}
+          style={{
+            width: `${progressWidth}%`
+          }}
+        />
+
       </div>
 
-      <p>
-        Terpakai Rp {used} dari Rp {limit}
+      <p className="dashboard-budget-used">
+
+        Terpakai Rp{" "}
+
+        {usedAmount.toLocaleString(
+          "id-ID"
+        )}
+
+        {" "}dari Rp{" "}
+
+        {limitAmount.toLocaleString(
+          "id-ID"
+        )}
+
       </p>
 
+      <p className="dashboard-budget-remaining">
+
+        Sisa Rp{" "}
+
+        {remaining.toLocaleString(
+          "id-ID"
+        )}
+
+      </p>
+
+      <span
+        className={`dashboard-budget-status ${statusClass}`}
+      >
+
+        {status}
+
+      </span>
+
     </div>
+
   );
+
 };
 
 export default BudgetItem;

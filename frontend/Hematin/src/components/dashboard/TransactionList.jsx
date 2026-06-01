@@ -28,30 +28,22 @@ const TransactionList = ({
           transactions.map((item) => (
 
             <TransactionItem
-              key={
-                item.id_transaction
-              }
-
-              title={
-                item.description
-              }
-
-              date={
-                new Date(
-                  item.transaction_date
-                ).toLocaleDateString()
-              }
-
-              amount={
-                item.amount
-              }
-
-              type={
-                item.transaction_type ===
-                "Pengeluaran"
-                  ? "pengeluaran"
-                  : "pemasukan"
-              }
+            key={item.id_transaction}
+            title={item.description}
+            date={
+              new Date(
+                item.transaction_date
+              ).toLocaleDateString(
+                "id-ID",
+                {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                }
+              )
+            }
+            amount={item.amount}
+            type={item.transaction_type}
             />
 
           ))

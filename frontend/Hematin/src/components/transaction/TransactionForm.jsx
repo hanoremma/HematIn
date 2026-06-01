@@ -17,6 +17,7 @@ const TransactionForm = ({
   handleChange,
   handleTypeChange,
   handleSubmit,
+  isEdit = false,
 }) => {
 
   /* =========================
@@ -141,7 +142,7 @@ const TransactionForm = ({
     >
 
       <h2 className="form-title">
-        Tambah Transaction
+        {isEdit ? "Edit Transaction" : "Tambah Transaction"}
       </h2>
 
       {/* TRANSACTION TYPE */}
@@ -316,11 +317,13 @@ const TransactionForm = ({
       {/* SUBMIT */}
 
       <button
-        type="submit"
-        className="submit-btn"
+      type="submit"
+      className="submit-btn"
       >
-        Save Transaction
-      </button>
+        {isEdit
+        ? "Update Transaksi"
+        : "Simpan Transaksi"}
+        </button>
 
     </form>
 

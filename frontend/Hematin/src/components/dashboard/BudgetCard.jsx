@@ -1,27 +1,57 @@
 import BudgetItem from "./BudgetItem";
 
-const BudgetCard = () => {
+const BudgetCard = ({
+  budgets = []
+}) => {
+
   return (
+
     <div className="budget-card">
 
-      <h4>Rencana Anggaran</h4>
+      <h4>
+        Rencana Anggaran
+      </h4>
 
-      <BudgetItem
-        title="Makanan"
-        used="850.000"
-        limit="1.200.000"
-        percent={71}
-      />
+      {
+        budgets.length === 0
+        ? (
+          <p>
+            Belum ada budget
+          </p>
+        )
+        : (
+          budgets
+            .slice(0, 3)
+            .map((budget) => (
 
-      <BudgetItem
-        title="Transportasi"
-        used="450.000"
-        limit="500.000"
-        percent={90}
-      />
+              <BudgetItem
+
+                key={
+                  budget.id_budget
+                }
+
+                title={
+                  budget.category_name
+                }
+
+                used={
+                  budget.used_amount
+                }
+
+                limit={
+                  budget.amount_limit
+                }
+
+              />
+
+            ))
+        )
+      }
 
     </div>
+
   );
+
 };
 
 export default BudgetCard;

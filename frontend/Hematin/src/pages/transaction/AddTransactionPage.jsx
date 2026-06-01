@@ -157,12 +157,9 @@ const AddTransactionPage = () => {
       <TransactionForm
         formData={formData}
         handleChange={handleChange}
-        handleTypeChange={
-          handleTypeChange
-        }
-        handleSubmit={
-          handleSubmit
-        }
+        handleTypeChange={handleTypeChange}
+        handleSubmit={handleSubmit}
+        isEdit={false}
       />
 
     </div>

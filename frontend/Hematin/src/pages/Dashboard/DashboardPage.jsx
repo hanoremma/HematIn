@@ -23,6 +23,10 @@ import {
 } from "../../services/transactionService";
 
 import {
+  getBudgets
+} from "../../services/budgetService";
+
+import {
   getDashboard,
   getDashboardAnalytics
 } from "../../services/dashboardService";
@@ -63,6 +67,9 @@ const DashboardPage = () => {
 
   });
 
+  const [budgets, setBudgets] =
+    useState([]);
+
   /* =========================
      FETCH DATA
   ========================= */
@@ -81,7 +88,8 @@ const DashboardPage = () => {
 
             transactionResult,
             dashboardResult,
-            analyticsResult
+            analyticsResult,
+            budgetResult
 
           ] = await Promise.allSettled([
 
@@ -94,6 +102,10 @@ const DashboardPage = () => {
             ),
 
             getDashboardAnalytics(
+              user.id_user
+            ),
+
+            getBudgets(
               user.id_user
             )
 
@@ -142,6 +154,15 @@ const DashboardPage = () => {
             analyticsData
           );
 
+          const budgetData =
+            budgetResult.status === "fulfilled"
+              ? budgetResult.value
+              : [];
+
+          setBudgets(
+            budgetData
+          );
+
         } catch (error) {
 
           console.log(error);
@@ -162,22 +183,55 @@ const DashboardPage = () => {
     transactions.slice(0, 5);
 
   const refreshDashboard =
-    async () => {
+  async () => {
 
-      if (!user?.id_user)
-        return;
+    if (!user?.id_user)
+      return;
 
-      const dashboardData =
-        await getDashboard(
-          user.id_user
-        );
+    const [
 
-      setDashboard(
-        dashboardData
-      );
+      transactionData,
+      dashboardData,
+      analyticsData,
+      budgetData
 
-    };
+    ] = await Promise.all([
 
+      getTransactions(
+        user.id_user
+      ),
+
+      getDashboard(
+        user.id_user
+      ),
+
+      getDashboardAnalytics(
+        user.id_user
+      ),
+
+      getBudgets(
+        user.id_user
+      )
+
+    ]);
+
+    setTransactions(
+      transactionData
+    );
+
+    setDashboard(
+      dashboardData
+    );
+
+    setAnalytics(
+      analyticsData
+    );
+
+    setBudgets(
+      budgetData
+    );
+
+};
   return (
 
     <div className="dashboard-page">
@@ -212,6 +266,7 @@ const DashboardPage = () => {
 
       <AnalyticsSection
         analytics={analytics}
+        budgets={budgets}
       />
 
       {/* BOTTOM */}

@@ -530,10 +530,9 @@ const handleDelete =
         <TransactionForm
           formData={formData}
           handleChange={handleChange}
-          handleTypeChange={
-            handleTypeChange
-          }
+          handleTypeChange={handleTypeChange}
           handleSubmit={handleSubmit}
+          isEdit={isEdit}
         />
 
       </Modal>

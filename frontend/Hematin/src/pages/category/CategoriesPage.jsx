@@ -323,15 +323,7 @@ const handleSubmit =
     setShowModal(false)
   }
 
-  title={
-
-    isEditing
-
-      ? "Edit Category"
-
-      : "Add Category"
-
-  }
+  title=''
 
 >
 
