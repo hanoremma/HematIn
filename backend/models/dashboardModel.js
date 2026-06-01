@@ -164,33 +164,38 @@ const getMonthlyAnalytics = async (id_user) => {
 const getWeeklyExpense = async (id_user) => {
 
   return await pool.query(
+
     `
     SELECT
-
       DATE(transaction_date) AS day,
-
-      SUM(amount) AS total
-
+      SUM(
+        CASE
+          WHEN transaction_type =
+          'Pemasukan'
+          THEN amount
+          ELSE 0
+        END
+      ) AS income,
+      SUM(
+        CASE
+          WHEN transaction_type =
+          'Pengeluaran'
+          THEN amount
+          ELSE 0
+        END
+      ) AS expense
     FROM transactions
-
     WHERE
-
       id_user = $1
-
       AND
-
-      transaction_type = 'Pengeluaran'
-
-      AND
-
       transaction_date >=
       NOW() - INTERVAL '7 days'
-
     GROUP BY day
-
     ORDER BY day
     `,
+
     [id_user]
+
   )
 
 }

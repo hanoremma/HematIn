@@ -8,7 +8,6 @@ import {
   BsReceipt,
   BsTagsFill,
   BsPiggyBankFill,
-  BsBarChartFill,
   BsQuestionCircle,
   BsBoxArrowRight
 } from "react-icons/bs";
@@ -95,14 +94,6 @@ const AppSidebar = () => {
               >
               <BsPiggyBankFill />
               <span>Budgets</span>
-              </NavLink>
-              
-              <NavLink
-              to="/reports"
-              className="sidebar-link"
-              >
-              <BsBarChartFill />
-              <span>Reports</span>
               </NavLink>
               
             </div>

@@ -3,12 +3,16 @@ import {
   useEffect,
   useCallback
 } from "react";
+import { toast } from "react-toastify";
 
 import CategoryCard
 from "../../components/category/CategoryCard";
 
 import Modal
 from "../../components/ui/Modal";
+
+import ConfirmModal
+from "../../components/ui/ConfirmModal";
 
 import CategoryForm
 from "../../components/category/CategoryForm";
@@ -29,6 +33,14 @@ const CategoriesPage = () => {
   const [categories,
   setCategories] =
     useState([]);
+
+  const [showDeleteModal,
+  setShowDeleteModal] =
+    useState(false);
+
+  const [categoryToDelete,
+  setCategoryToDelete] =
+    useState(null);
 
   /* =========================
      FETCH CATEGORY
@@ -94,23 +106,45 @@ const CategoriesPage = () => {
   const handleDelete =
   async (id_category) => {
 
-    const confirmDelete =
-      window.confirm(
-        "Apakah Anda yakin ingin menghapus kategori ini?"
+    const category =
+      categories.find(
+        (item) =>
+          item.id_category === id_category
       );
 
-    if (!confirmDelete)
+    setCategoryToDelete(
+      category ?? { id_category }
+    );
+
+    setShowDeleteModal(true);
+
+};
+
+const handleCloseDeleteModal =
+  () => {
+
+    setShowDeleteModal(false);
+    setCategoryToDelete(null);
+
+};
+
+const handleConfirmDelete =
+  async () => {
+
+    if (!categoryToDelete?.id_category)
       return;
 
     try {
 
       await deleteCategory(
-        id_category
+        categoryToDelete.id_category
       );
 
-      alert(
+      toast.success(
         "Kategori berhasil dihapus"
       );
+
+      handleCloseDeleteModal();
 
       fetchCategories();
 
@@ -118,7 +152,7 @@ const CategoriesPage = () => {
 
       console.log(error);
 
-      alert(
+      toast.error(
         "Gagal menghapus kategori"
       );
 
@@ -221,6 +255,10 @@ const handleSubmit =
 
         );
 
+        toast.success(
+          "Kategori berhasil diupdate"
+        );
+
       } else {
 
         await addCategory({
@@ -233,6 +271,10 @@ const handleSubmit =
 
         });
 
+        toast.success(
+          "Kategori berhasil ditambahkan"
+        );
+
       }
 
       setShowModal(false);
@@ -242,6 +284,10 @@ const handleSubmit =
     } catch (error) {
 
       console.log(error);
+
+      toast.error(
+        "Gagal menyimpan kategori"
+      );
 
     }
 
@@ -348,6 +394,28 @@ const handleSubmit =
 </Modal>
 
       </div>
+
+      <ConfirmModal
+
+        show={showDeleteModal}
+
+        onClose={
+          handleCloseDeleteModal
+        }
+
+        onConfirm={
+          handleConfirmDelete
+        }
+
+        title="Delete Category"
+
+        message={
+          categoryToDelete?.category_name
+            ? `Yakin ingin menghapus kategori ${categoryToDelete.category_name}?`
+            : "Yakin ingin menghapus kategori ini?"
+        }
+
+      />
 
     </div>
 

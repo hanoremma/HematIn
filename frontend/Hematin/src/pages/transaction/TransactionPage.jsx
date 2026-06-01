@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
+import { toast } from "react-toastify";
 import "../../dist/css/Transaction.css";
 
 import Modal from "../../components/ui/Modal";
+import ConfirmModal from "../../components/ui/ConfirmModal";
 
 import TransactionForm
 from "../../components/transaction/TransactionForm";
@@ -61,6 +63,14 @@ const TransactionPage = () => {
   
   const [selectedTransaction,
     setSelectedTransaction] =
+    useState(null);
+
+  const [showDeleteModal,
+    setShowDeleteModal] =
+    useState(false);
+
+  const [transactionToDelete,
+    setTransactionToDelete] =
     useState(null);
 
   /* =========================
@@ -155,6 +165,47 @@ useEffect(() => {
 
   };
 
+  const resetTransactionForm = () => {
+
+    setIsEdit(false);
+
+    setSelectedTransaction(null);
+
+    setFormData({
+
+      transactionType:
+        "Pengeluaran",
+
+      amount: "",
+
+      description: "",
+
+      transactionDate: "",
+
+      wallet: "",
+
+      category: "",
+
+    });
+
+  };
+
+  const handleOpenAdd = () => {
+
+    resetTransactionForm();
+
+    setShowTransaction(true);
+
+  };
+
+  const handleCloseTransaction = () => {
+
+    setShowTransaction(false);
+
+    resetTransactionForm();
+
+  };
+
 /* =========================
    HANDLE SUBMIT
 ========================= */
@@ -218,7 +269,7 @@ const handleSubmit =
 
 await fetchTransactions();
 
-        alert(
+        toast.success(
           "Transaction updated"
         );
 
@@ -239,7 +290,7 @@ await fetchTransactions();
 
         await fetchTransactions();
 
-        alert(
+        toast.success(
           "Transaction added"
         );
 
@@ -249,34 +300,13 @@ await fetchTransactions();
          RESET FORM
       ========================= */
 
-      setShowTransaction(false);
-
-      setIsEdit(false);
-
-      setSelectedTransaction(null);
-
-      setFormData({
-
-        transactionType:
-          "Pengeluaran",
-
-        amount: "",
-
-        description: "",
-
-        transactionDate: "",
-
-        wallet: "",
-
-        category: "",
-
-      });
+      handleCloseTransaction();
 
     } catch (error) {
 
       console.log(error);
 
-      alert(
+      toast.error(
         "Gagal simpan transaction"
       );
 
@@ -291,17 +321,37 @@ await fetchTransactions();
 const handleDelete =
   async (id_transaction) => {
 
-    const confirmDelete =
-      window.confirm(
-        "Hapus transaction?"
+    const transaction =
+      transactions.find(
+        (item) =>
+          item.id_transaction === id_transaction
       );
 
-    if (!confirmDelete) return;
+    setTransactionToDelete(
+      transaction ?? { id_transaction }
+    );
+
+    setShowDeleteModal(true);
+
+};
+
+const handleCloseDeleteModal = () => {
+
+  setShowDeleteModal(false);
+  setTransactionToDelete(null);
+
+};
+
+const handleConfirmDelete =
+  async () => {
+
+    if (!transactionToDelete?.id_transaction)
+      return;
 
     try {
 
       await deleteTransaction(
-        id_transaction
+        transactionToDelete.id_transaction
       );
 
       const filtered =
@@ -309,20 +359,22 @@ const handleDelete =
           (item) =>
 
             item.id_transaction !==
-            id_transaction
+            transactionToDelete.id_transaction
         );
 
       setTransactions(filtered);
 
-      alert(
+      toast.success(
         "Transaction deleted"
       );
+
+      handleCloseDeleteModal();
 
     } catch (error) {
 
       console.log(error);
 
-      alert(
+      toast.error(
         "Gagal hapus transaction"
       );
 
@@ -421,9 +473,7 @@ const handleDelete =
 
           <button
             className="add-btn"
-            onClick={() =>
-              setShowTransaction(true)
-            }
+            onClick={handleOpenAdd}
           >
             + Tambah Transaksi
           </button>
@@ -522,9 +572,7 @@ const handleDelete =
 
       <Modal
         show={showTransaction}
-        onClose={() =>
-          setShowTransaction(false)
-        }
+        onClose={handleCloseTransaction}
       >
 
         <TransactionForm
@@ -543,6 +591,18 @@ const handleDelete =
         show={showReceipt}
         onClose={() =>
           setShowReceipt(false)
+        }
+      />
+
+      <ConfirmModal
+        show={showDeleteModal}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleConfirmDelete}
+        title="Delete Transaction"
+        message={
+          transactionToDelete?.description
+            ? `Yakin ingin menghapus transaksi ${transactionToDelete.description}?`
+            : "Yakin ingin menghapus transaksi ini?"
         }
       />
 

@@ -3,12 +3,16 @@ import {
   useEffect,
   useCallback
 } from "react";
+import { toast } from "react-toastify";
 
 import BudgetCard
 from "../../components/budget/BudgetCard";
 
 import Modal
 from "../../components/ui/Modal";
+
+import ConfirmModal
+from "../../components/ui/ConfirmModal";
 
 import BudgetForm
 from "../../components/budget/BudgetForm";
@@ -42,6 +46,8 @@ const BudgetPage = () => {
   const [categories, setCategories] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingBudget, setEditingBudget] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [budgetToDelete, setBudgetToDelete] = useState(null);
   const [formData, setFormData] = useState(EMPTY_FORM);
 
   /* =========================
@@ -160,16 +166,17 @@ const BudgetPage = () => {
 
       if (editingBudget) {
         await updateBudget(editingBudget.id_budget, payload);
-        alert("Budget berhasil diupdate");
+        toast.success("Budget berhasil diupdate");
       } else {
         await addBudget(payload);
-        alert("Budget berhasil ditambahkan");
+        toast.success("Budget berhasil ditambahkan");
       }
 
       await fetchBudgets();
       setShowModal(false);
     } catch (error) {
       console.log(error);
+      toast.error("Gagal menyimpan budget");
     }
   };
 
@@ -178,12 +185,30 @@ const BudgetPage = () => {
   ========================= */
 
   const handleDelete = async (id_budget) => {
-    if (!window.confirm("Hapus budget ini?")) return;
+    const budget = budgets.find(
+      (item) => item.id_budget === id_budget
+    );
+
+    setBudgetToDelete(budget ?? { id_budget });
+    setShowDeleteModal(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setBudgetToDelete(null);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!budgetToDelete?.id_budget) return;
+
     try {
-      await deleteBudget(id_budget);
+      await deleteBudget(budgetToDelete.id_budget);
+      toast.success("Budget berhasil dihapus");
+      handleCloseDeleteModal();
       await fetchBudgets();
     } catch (error) {
       console.log(error);
+      toast.error("Gagal menghapus budget");
     }
   };
 
@@ -247,6 +272,18 @@ const BudgetPage = () => {
           isEditing={!!editingBudget}
         />
       </Modal>
+
+      <ConfirmModal
+        show={showDeleteModal}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleConfirmDelete}
+        title="Delete Budget"
+        message={
+          budgetToDelete?.description_budget
+            ? `Yakin ingin menghapus budget ${budgetToDelete.description_budget}?`
+            : "Yakin ingin menghapus budget ini?"
+        }
+      />
 
     </div>
   );

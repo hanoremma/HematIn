@@ -42,6 +42,37 @@ const TransactionForm = ({
   const [wallets, setWallets] =
     useState([]);
 
+  const handleAmountChange = (e) => {
+
+  const value =
+    e.target.value.replace(
+      /\D/g,
+      ""
+    );
+
+  handleChange({
+
+    target: {
+
+      name: "amount",
+
+      value
+
+    }
+
+  });
+
+};
+
+const formatNumber = (value) => {
+
+  if (!value) return "";
+
+  return Number(value)
+    .toLocaleString("id-ID");
+
+};
+
   /* =========================
      FETCH CATEGORY
   ========================= */
@@ -173,11 +204,12 @@ const TransactionForm = ({
         </label>
 
         <input
-          type="number"
+          type="text"
           name="amount"
           placeholder="Enter amount"
-          value={formData.amount}
-          onChange={handleChange}
+          value={
+            formatNumber(formData.amount)}
+          onChange={handleAmountChange}
           required
         />
 

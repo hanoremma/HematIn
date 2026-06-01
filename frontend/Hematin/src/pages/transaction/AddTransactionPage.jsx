@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 import TransactionForm
 from "../../components/transaction/TransactionForm";
@@ -71,7 +72,7 @@ const AddTransactionPage = () => {
           !formData.category
         ) {
 
-          alert(
+          toast.error(
             "Semua field wajib diisi"
           );
 
@@ -126,7 +127,7 @@ const AddTransactionPage = () => {
           result
         );
 
-        alert(
+        toast.success(
           "Transaction berhasil ditambahkan"
         );
 
@@ -141,7 +142,7 @@ const AddTransactionPage = () => {
           error
         );
 
-        alert(
+        toast.error(
           error?.response?.data?.message
           || "Gagal tambah transaction"
         );

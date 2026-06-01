@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
+import { toast } from "react-toastify";
 
 import Modal from "../../components/ui/Modal";
+import ConfirmModal from "../../components/ui/ConfirmModal";
 
 import WalletForm
   from "../../components/wallet/WalletForm";
@@ -45,6 +47,12 @@ const WalletPage = () => {
     useState(false);
 
   const [selectedWallet, setSelectedWallet] =
+    useState(null);
+
+  const [showDeleteModal, setShowDeleteModal] =
+    useState(false);
+
+  const [walletToDelete, setWalletToDelete] =
     useState(null);
 
   const [formData, setFormData] =
@@ -162,6 +170,8 @@ const WalletPage = () => {
           }
         );
 
+        toast.success("Wallet berhasil diupdate");
+
       } else {
 
         await addWallet({
@@ -171,6 +181,8 @@ const WalletPage = () => {
           wallet_type: formData.wallet_type,
         });
 
+        toast.success("Wallet berhasil ditambahkan");
+
       }
 
       handleCloseModal();
@@ -179,7 +191,7 @@ const WalletPage = () => {
     } catch (error) {
 
       console.log(error);
-      alert("Gagal menyimpan wallet");
+      toast.error("Gagal menyimpan wallet");
 
     }
 
@@ -191,21 +203,37 @@ const WalletPage = () => {
 
   const handleDelete = async (id_wallet) => {
 
-    const confirmed = window.confirm(
-      "Yakin ingin menghapus wallet ini?"
+    const wallet = wallets.find(
+      (item) => item.id_wallet === id_wallet
     );
 
-    if (!confirmed) return;
+    setWalletToDelete(wallet ?? { id_wallet });
+    setShowDeleteModal(true);
+
+  };
+
+  const handleCloseDeleteModal = () => {
+
+    setShowDeleteModal(false);
+    setWalletToDelete(null);
+
+  };
+
+  const handleConfirmDelete = async () => {
+
+    if (!walletToDelete?.id_wallet) return;
 
     try {
 
-      await deleteWallet(id_wallet);
+      await deleteWallet(walletToDelete.id_wallet);
+      toast.success("Wallet berhasil dihapus");
+      handleCloseDeleteModal();
       await fetchWallets();
 
     } catch (error) {
 
       console.log(error);
-      alert("Gagal menghapus wallet");
+      toast.error("Gagal menghapus wallet");
 
     }
 
@@ -297,6 +325,18 @@ const WalletPage = () => {
         />
 
       </Modal>
+
+      <ConfirmModal
+        show={showDeleteModal}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleConfirmDelete}
+        title="Delete Wallet"
+        message={
+          walletToDelete?.wallet_name
+            ? `Yakin ingin menghapus wallet ${walletToDelete.wallet_name}?`
+            : "Yakin ingin menghapus wallet ini?"
+        }
+      />
 
     </div>
   );
