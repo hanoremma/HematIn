@@ -27,10 +27,10 @@ const HomePage = () => {
                     Kelola Keuanganmu <br /><span>dengan Mudah</span><br />Bersama Hematin!
                 </h1>
                 <p className="mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Satu aplikasi, semua keuangan terkendali.
                 </p>
                 <button className="btn btn-danger btn-lg rounded-1 me-2 mb-xs-0 mb-2" onClick={() => navigate("/fiture")}>Lihat Fitur</button>
-                <Link to="/dashboard" className="btn btn-outline-danger btn-lg rounded-1 me-2 mb-xs-0 mb-2">Get Started</Link>
+                <Link to="/login" className="btn btn-outline-danger btn-lg rounded-1 me-2 mb-xs-0 mb-2">Get Started</Link>
             </Col>
             <Col lg="6" className="pt-lg-0 pt-5">
                 <img src={WalletImage} alt="wallet-img" />
@@ -46,7 +46,7 @@ const HomePage = () => {
                         Fitur Unggulan
                     </h1>
                     <p className="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Hematin memiliki fitur unggulan yang dapat membantu Anda mengelola keuangan dengan lebih baik. Mulai dari pencatatan transaksi, pembuatan anggaran, hingga laporan keuangan yang mudah dipahami. Semua fitur ini dirancang untuk memberikan pengalaman terbaik dalam mengelola keuangan Anda.
                     </p>
                 </Col>
             </Row>

@@ -104,7 +104,7 @@ const AddBudgetPage = () => {
 
   fetchCategories();
 
-}, []);
+}, [user]);
 
   /* =========================
      HANDLE CHANGE

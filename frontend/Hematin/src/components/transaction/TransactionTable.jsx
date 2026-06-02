@@ -15,14 +15,14 @@ const TransactionTable = ({
         <tr>
 
           <th>No</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Category</th>
-          <th>Amount</th>
+          <th>Tipe</th>
+          <th>Deskripsi</th>
+          <th>Kategori</th>
+          <th>Jumlah</th>
           <th>Wallet</th>
-          <th>Date</th>
-          <th>Source</th>
-          <th>Action</th>
+          <th>Tanggal</th>
+          <th>Sumber</th>
+          <th>Aksi</th>
 
         </tr>
 
@@ -104,7 +104,7 @@ const TransactionTable = ({
         )
       }
     >
-      Delete
+      Hapus
     </button>
 
   </div>

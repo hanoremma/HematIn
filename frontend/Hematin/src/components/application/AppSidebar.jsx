@@ -42,10 +42,12 @@ const AppSidebar = () => {
 
           <div>
 
-            <h3>Hematin</h3>
+            <h3>
+              <NavLink to="/dashboard">Hematin</NavLink>
+            </h3>
 
             <p>
-              Money Management
+              Manajemen Keuangan
             </p>
 
           </div>

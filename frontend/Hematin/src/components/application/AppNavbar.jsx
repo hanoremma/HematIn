@@ -20,7 +20,7 @@ const AppNavbar = () => {
             className="menu-btn"
             onClick={() => setShow(true)}
           >
-            ☰
+            <i className="bi bi-grid"></i>
           </button>
 
         </div>

@@ -9,50 +9,42 @@ const ToSPage = () => {
           <Row>
             <Col>
             <h1 className="fw-bold text-center mb-2">Syarat & Ketentuan</h1>
-            <p  className="text-center">Lorem ipsum dolor sit amet consectetur</p>
+            <p  className="text-center">Berikut adalah syarat dan ketentuan yang berlaku saat menggunakan aplikasi Hematin.</p>
             </Col>
           </Row>
           <Row className="pt-5">
             <Col>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              Tempore rem sequi quam, placeat quas reiciendis dolores itaque 
-              incidunt consequatur nostrum a neque autem temporibus explicabo 
-              officiis porro voluptatem officia magnam soluta possimus dicta 
-              adipisci? Officia ratione voluptas debitis, quos rerum cumque 
-              tenetur aperiam impedit quaerat nihil hic vel obcaecati nobis 
-              ad reprehenderit? Natus quia soluta eos, suscipit tempora fuga? 
-              Nulla.</p>
+            <p>Syarat dan ketentuan ini mengatur penggunaan aplikasi Hematin. Dengan menggunakan aplikasi ini, Anda setuju untuk mematuhi syarat dan ketentuan yang berlaku.</p>
             </Col>
           </Row>
           <Row>
             <Col>
-            <h4 className="fw-bold">1. Lorem</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo praesentium laborum fugit. Itaque neque pariatur vel possimus esse saepe doloribus facilis incidunt, quibusdam quaerat veniam facere omnis magni est necessitatibus nostrum amet asperiores consectetur autem repellat. Laboriosam vitae saepe adipisci.</p>
+            <h4 className="fw-bold">1. Syarat Umum</h4>
+            <p>Dengan menggunakan aplikasi Hematin, Anda setuju untuk mematuhi syarat dan ketentuan yang berlaku.</p>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. At officiis possimus quam qui, vel nostrum iste atque laboriosam suscipit totam eius ex laborum pariatur minima eum laudantium. Ipsum rem culpa magni ad, beatae illum dolorum veniam eveniet, quibusdam ut quos.
+              Pengguna harus berusia minimal 17 tahun untuk menggunakan aplikasi Hematin. Dengan menggunakan aplikasi ini, Anda menyatakan bahwa Anda memenuhi persyaratan usia tersebut dan memiliki kapasitas hukum untuk menyetujui syarat dan ketentuan ini.
             </p>
             <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam nostrum deserunt esse quidem laboriosam, nobis quisquam sapiente nihil tempora blanditiis dolor soluta, odio tempore repellendus ex sit nesciunt? Ratione pariatur quaerat est autem iusto. Et quam cupiditate quos corrupti hic.
-            </p>
-            </Col>
-          </Row>
-          <Row className="py-3">
-            <Col>
-            <h4 className="fw-bold">2. Lorem</h4>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis id tempore eveniet illo recusandae temporibus sapiente eos aliquid dolorum dolore ut sit, omnis quo. Nam, quos. Sunt unde asperiores fugiat! Magni sed perferendis voluptatum dicta nulla ducimus praesentium recusandae doloribus, eligendi assumenda, quidem consectetur distinctio possimus architecto, inventore nobis fugit voluptas debitis necessitatibus provident hic aspernatur ut veniam doloremque! Beatae.</p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, molestiae! Enim tempora ab porro? Placeat, ratione dignissimos aliquid asperiores nemo, iure exercitationem hic nulla sed saepe maxime, qui ea officia sequi quo!
+              Pengguna bertanggung jawab untuk menjaga kerahasiaan informasi akun mereka, termasuk kata sandi dan informasi pribadi lainnya. Hematin tidak bertanggung jawab atas kerugian atau kerusakan yang timbul akibat penggunaan akun yang tidak sah atau pelanggaran keamanan.
             </p>
             </Col>
           </Row>
           <Row className="py-3">
             <Col>
-            <h4 className="fw-bold">3. Lorem</h4>
+            <h4 className="fw-bold">2. Ketentuan Penggunaan</h4>
+            <p>Pengguna setuju untuk menggunakan aplikasi Hematin sesuai dengan hukum yang berlaku dan tidak menyalahgunakan aplikasi untuk tujuan yang melanggar hukum atau merugikan pihak lain.</p>
             <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit saepe doloribus earum, numquam eos qui quo, in magni sunt quidem quisquam accusantium. Minima omnis veniam numquam labore sunt! Dignissimos tempore incidunt nostrum dolorum sunt facilis tenetur fuga quam illo. Ea minus eaque similique suscipit voluptatem!
+              Pengguna tidak diperbolehkan untuk mengakses, mengubah, atau menyebarkan data pengguna lain tanpa izin. Hematin berhak untuk menangguhkan atau menghentikan akun pengguna yang melanggar ketentuan ini.
             </p>
+            </Col>
+          </Row>
+          <Row className="py-3">
+            <Col>
+            <h4 className="fw-bold">3. Privasi dan Keamanan</h4>
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque delectus totam, eum ipsa blanditiis, impedit reprehenderit pariatur odit maiores alias possimus minima officiis. Ratione, beatae aut! Eaque similique voluptate architecto dolore mollitia porro laudantium corrupti fugit voluptates nulla veritatis reprehenderit temporibus accusamus incidunt, velit repellat. Dicta ipsam ex officiis saepe?
+              Hematin berkomitmen untuk melindungi privasi dan keamanan data pengguna. Informasi pribadi yang dikumpulkan akan digunakan sesuai dengan kebijakan privasi yang berlaku.  Pengguna setuju untuk memberikan informasi yang akurat dan lengkap saat mendaftar dan menggunakan aplikasi Hematin. Hematin tidak bertanggung jawab atas kerugian atau kerusakan yang timbul akibat penggunaan informasi yang tidak akurat atau tidak lengkap.
+            </p>
+            <p>Hematin menggunakan teknologi keamanan yang sesuai untuk melindungi data pengguna. Namun, tidak ada sistem keamanan yang sempurna, dan Hematin tidak dapat menjamin keamanan data pengguna sepenuhnya. Pengguna bertanggung jawab untuk menjaga kerahasiaan informasi akun mereka dan melaporkan setiap aktivitas mencurigakan kepada Hematin.
             </p>
             </Col>
           </Row>

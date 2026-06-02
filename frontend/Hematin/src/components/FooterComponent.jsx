@@ -8,24 +8,24 @@ const FooterComponent = () => {
         <Row className="d-flex justify-content-between">
           <Col lg="5">
           <h3 className="fw-bold">Hematin</h3>
-          <p className="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+          <p className="desc">Satu aplikasi, semua keuangan terkendali.</p>
           <div className="no mb-1 mt-4">
             <Link className="text-decoration-none">
             <i className="fa-brands fa-whatsapp"></i>
-            <p className="m-0">+62-123-4567-8923</p>
+            <p className="m-0">+62-857-0223-5151</p>
             </Link>
           </div>
           <div className="mail">
-            <Link className="text-decoration-none"  >
+            <a className="text-decoration-none" href="mailto:hematin075@gmail.com">
             <i className="fa-regular fa-envelope"></i>
-            <p className="m-0">hematin@example.com</p>
-          </Link>
+            <p className="m-0">hematin075@gmail.com</p>
+          </a>
           </div>
           </Col>
           <Col className="d-flex flex-column col-lg-2 col mt-lg-0 mt-5">
           <h5 className="fw-bold">Menu</h5>
           <Link to="/">Home</Link>
-          <Link to="/fiture">Fitur</Link>
+          <Link to="/fiture">Fitur & Cara Penggunaan</Link>
           <Link to="/testimonial">Testimonial</Link>
           <Link to="/faq">FAQ</Link>
           <Link to="/tos">Syarat & Ketentuan</Link>
@@ -34,7 +34,7 @@ const FooterComponent = () => {
           <h5 className="fw-bold mb-3">Subscribe untuk update terbaru</h5>
           <div className="subscribes">
             <input type="email" placeholder="Enter your email" />
-            <button className="btn btn-danger rounded-end rounded-0">Subscribe</button>
+            <button className="btn btn-danger rounded-end rounded-0" onClick={() => alert('Subscribed!')}>Subscribe</button>
           </div>
           <div className="social">
             <i className="fa-brands fa-facebook"></i>

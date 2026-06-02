@@ -1,18 +1,88 @@
-const FinanceTipsCard = () => {
+const FinanceTipsCard = ({
+  recommendation,
+  loadingAi
+}) => {
+
   return (
+
     <div className="finance-tips-card">
-      <h4>Tips Keuangan</h4>
 
-      <p>
-        Pengeluaran bulan ini meningkat 12%
-        dibanding bulan lalu.
-      </p>
+      <h4>
+        🤖 Tips Keuangan AI
+      </h4>
 
-      <div className="tips-box">
-        💡 Sisihkan minimal 20% pemasukan
-      </div>
+      {
+
+        loadingAi
+
+        ?
+
+        <p>
+          Memuat rekomendasi...
+        </p>
+
+        :
+
+        <>
+
+          <div
+            style={{
+              whiteSpace: "pre-line",
+              lineHeight: "1.6",
+              fontSize: "13px",
+              marginBottom: "15px",
+              maxHeight: "180px",
+              overflowY: "auto"
+            }}
+          >
+
+            {
+
+              recommendation?.rekomendasi
+
+              ?
+
+              recommendation.rekomendasi
+                .replace(/#/g, "")
+
+              :
+
+              "Belum ada rekomendasi."
+
+            }
+
+          </div>
+
+          <div className="tips-box">
+
+            💰 Total Pengeluaran:
+
+            Rp {
+
+              recommendation?.ringkasan
+                ?.total_pengeluaran
+
+                ?
+
+                recommendation.ringkasan.total_pengeluaran
+                  .toLocaleString("id-ID")
+
+                :
+
+                "0"
+
+            }
+
+          </div>
+
+        </>
+
+      }
+
     </div>
+
   );
+
 };
 
 export default FinanceTipsCard;

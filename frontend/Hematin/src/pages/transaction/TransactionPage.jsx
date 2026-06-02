@@ -457,7 +457,7 @@ const handleConfirmDelete =
 
     <i className="bi bi-receipt"></i>
 
-    <h2>Transactions</h2>
+    <h2>Transaksi</h2>
 
   </div>
 
@@ -519,7 +519,7 @@ const handleConfirmDelete =
         >
 
           <option value="All">
-            Semua Type
+            Semua Tipe
           </option>
 
           <option value="Pengeluaran">

@@ -23,6 +23,10 @@ import {
 } from "../../services/transactionService";
 
 import {
+  getRecommendation
+} from "../../services/aiService";
+
+import {
   getBudgets
 } from "../../services/budgetService";
 
@@ -66,6 +70,16 @@ const DashboardPage = () => {
     weekly: []
 
   });
+
+    const [
+    recommendation,
+    setRecommendation
+  ] = useState(null);
+  
+  const [
+    loadingAi,
+    setLoadingAi
+  ] = useState(true);
 
   const [budgets, setBudgets] =
     useState([]);
@@ -170,10 +184,35 @@ const DashboardPage = () => {
         }
 
       };
+      const fetchAi =
+      async () => {
+  
+        try {
+  
+          const data =
+            await getRecommendation();
+  
+          setRecommendation(
+            data
+          );
+  
+        } catch (error) {
+  
+          console.log(error);
+  
+        } finally {
+  
+          setLoadingAi(false);
+  
+        }
+      };
 
     fetchData();
+    fetchAi();
 
   }, [user?.id_user]);
+
+  
 
   /* =========================
      LATEST 5 TRANSACTIONS
@@ -275,6 +314,14 @@ const DashboardPage = () => {
         transactions={
           latestTransactions
         }
+
+        recommendation={
+    recommendation
+  }
+
+  loadingAi={
+    loadingAi
+  }
       />
 
     </div>

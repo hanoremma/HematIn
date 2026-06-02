@@ -10,6 +10,7 @@ const transactionRoutes = require('./routes/transactionRoutes')
 const budgetRoutes = require('./routes/budgetRoutes')
 const transactionImgRoutes = require('./routes/transactionImgRoutes')
 const dashboardRoutes = require('./routes/dashboardRoutes')
+const recommendationRoutes = require('./routes/recommendationRoutes');
 
 const app = express()
 
@@ -31,6 +32,7 @@ app.use('/transaction', transactionRoutes)
 app.use('/budget', budgetRoutes)
 app.use('/transaction-img', transactionImgRoutes)
 app.use('/dashboard', dashboardRoutes)
+app.use('/recommendation', recommendationRoutes);
 
 
 app.listen(3000, () => {

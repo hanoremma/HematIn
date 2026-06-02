@@ -20,6 +20,7 @@ import WalletPage from "./pages/wallet/WalletPage";
 import BudgetPage from "./pages/budget/BudgetPage";
 import CategoriesPage from "./pages/category/CategoriesPage";
 import AddCategoryPage from "./pages/category/AddCategoryPage";
+import ProfilePage from "./pages/profile/ProfilePage";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
         <Route path="/budgets" element={<BudgetPage />}/>
         <Route path="/categories" element={<CategoriesPage />}/>
         <Route path="/categories/add" element={<AddCategoryPage />}/>
+        <Route path="/profile" element={<ProfilePage />}/>
 
       </Route>
 

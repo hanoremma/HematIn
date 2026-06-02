@@ -308,7 +308,7 @@ const handleSubmit =
           <div>
 
             <h2>
-              Categories
+              Kategori
             </h2>
 
             <p>
@@ -323,7 +323,7 @@ const handleSubmit =
   className="add-category-btn"
   onClick={handleAdd}
 >
-  + Add Category
+  + Tambah Kategori
 </button>
 
       </div>

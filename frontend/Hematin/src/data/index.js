@@ -3,8 +3,8 @@ import FitureImage2  from "../assets/fiture/fiture 2.jpg";
 import FitureImage3 from "../assets/fiture/fiture 3.jpg";
 import FitureImage4 from "../assets/fiture/fiture 4.jpg";
 
-import People1 from "../assets/testimonial/person 1.jpg";
-import People2 from "../assets/testimonial/person 2.jpg";
+import People1 from "../assets/testimonial/profile.jpg";
+import People2 from "../assets/testimonial/profile2.jpg";
 
 export const navLinks = [
   {
@@ -15,7 +15,7 @@ export const navLinks = [
   {
     id: 2,
     path: "fiture",
-    text: "Fitur",
+    text: "Fitur & Cara Penggunaan",
   },
   {
     id: 3,
@@ -64,45 +64,45 @@ export const semuaFitur = [
 export const dataSwiper = [
   {
     id: 1,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
+    desc: "Aplikasi sangat membantu saya dalam mengelola keuangan pribadi. Fitur pencatatan transaksi yang mudah digunakan membuat saya bisa memantau pemasukan dan pengeluaran dengan lebih baik.",
     image: People1,
-    name: "People 1",
-    skill: "UI UX Designer",
+    name: "Herdin Thorik Nurmaputra",
+    skill: "AI Engineer",
   },
   {
     id: 2,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
+    desc: "Aplikasi ini sangat membantu saya dalam mengelola keuangan bisnis. Fitur analisis keuangan yang mendalam memungkinkan saya membuat keputusan yang lebih cerdas.",
     image: People2,
-    name: "People 2",
-    skill: "Flutter Developer",
+    name: "Dewi Maratul Darojat",
+    skill: "Data Scientist",
   },
   {
     id: 3,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
+    desc: "Aplikasi ini sangat membantu saya dalam mengelola keuangan pribadi. Rekomendasi yang diberikan sangat tepat dan membantu saya membuat keputusan finansial yang lebih baik.",
     image: People1,
-    name: "People 3",
-    skill: "Web Developer",
+    name: "Dwi Fita Aulia Rahma",
+    skill: "AI Engineer",
   },
   {
     id: 4,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
+    desc: "Aplikasi ini sangat membantu saya dalam mengelola keuangan bisnis. Fitur analisis keuangan yang mendalam memungkinkan saya membuat keputusan yang lebih cerdas.",
     image: People2,
-    name: "People 4",
-    skill: "UI UX Designer",
+    name: "Elisabeth Gloria",
+    skill: "Full Stack Developer",
   },
   {
     id: 5,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
+    desc: "Aplikasi ini sangat membantu saya dalam mengelola keuangan pribadi. Fitur pencatatan transaksi yang mudah digunakan membuat saya bisa memantau pemasukan dan pengeluaran dengan lebih baik.",
     image: People1,
-    name: "People 5",
-    skill: "Flutter Developer",
+    name: "Rachmita Salma",
+    skill: "Data Scientist",
   },
   {
     id: 6,
-    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
+    desc: "Aplikasi ini sangat membantu saya dalam mengelola keuangan bisnis. Fitur budgeting yang disediakan sangat membantu saya dalam merencanakan keuangan bisnis dengan lebih baik.",
     image: People2,
-    name: "People 6",
-    skill: "Web Developer",
+    name: "Halimah Ahmad Nuraini",
+    skill: "Full Stack Developer",
   },
 ];
 
@@ -140,8 +140,8 @@ export const faq = [
   {
     id: 6,
     eventKey: 5,
-    title: "Apakah aplikasi ini bisa digunakan di lebih dari satu perangkat?",
-    desc: "Ya, selama kamu login dengan akun yang sama, data kamu akan tersinkronisasi di berbagai perangkat."
+    title: "Apakah aplikasi ini bisa digunakan untuk perangkat mobile dan desktop?",
+    desc: "Ya, aplikasi ini dirancang responsif sehingga bisa digunakan di berbagai perangkat, baik itu smartphone maupun komputer, untuk memudahkan pengelolaan keuangan kapan saja dan di mana saja."
   },
   {
     id: 7,

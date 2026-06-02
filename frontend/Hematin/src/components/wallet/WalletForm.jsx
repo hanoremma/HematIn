@@ -47,12 +47,12 @@ const WalletForm = ({
       {/* WALLET NAME */}
       <div className="form-group">
 
-        <label>Wallet Name</label>
+        <label>Nama Wallet</label>
 
         <input
           type="text"
           name="wallet_name"
-          placeholder="Enter wallet name"
+          placeholder="Masukkan nama wallet"
           value={formData.wallet_name}
           onChange={handleChange}
           required
@@ -63,7 +63,7 @@ const WalletForm = ({
       {/* WALLET TYPE */}
       <div className="form-group">
 
-        <label>Wallet Type</label>
+        <label>Tipe Wallet</label>
 
         <select
           name="wallet_type"
@@ -73,7 +73,7 @@ const WalletForm = ({
         >
 
           <option value="">
-            Select Wallet Type
+            Pilih Tipe Wallet
           </option>
 
           {walletTypes.map((type) => (
@@ -90,13 +90,13 @@ const WalletForm = ({
       <div className="form-group">
 
         <label>
-          {isEdit ? "Balance" : "Initial Balance"}
+          {isEdit ? "Saldo" : "Isi Saldo Awal"}
         </label>
 
         <input
           type="number"
           name="balance"
-          placeholder="Enter balance"
+          placeholder={isEdit ? "Enter balance" : "Isi saldo awal"}
           value={formData.balance}
           onChange={handleChange}
           min="0"

@@ -16,8 +16,8 @@ const CategoryForm = ({
 
         {
           isEditing
-            ? "Edit Category"
-            : "Add Category"
+            ? "Edit Kategori"
+            : "Tambah Kategori"
         }
 
       </h2>
@@ -25,7 +25,7 @@ const CategoryForm = ({
       <div className="form-group">
 
         <label>
-          Category Name
+          Nama Kategori
         </label>
 
         <input
@@ -33,7 +33,7 @@ const CategoryForm = ({
           name="categoryName"
           value={formData.categoryName}
           onChange={handleChange}
-          placeholder="Enter category name"
+          placeholder="Masukkan nama kategori"
           required
         />
 
@@ -46,8 +46,8 @@ const CategoryForm = ({
 
         {
           isEditing
-            ? "Update Category"
-            : "Save Category"
+            ? "Update Kategori"
+            : "Simpan Kategori"
         }
 
       </button>

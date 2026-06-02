@@ -1,21 +1,41 @@
+import { useNavigate } from "react-router-dom";
+
 const ProfileMenu = () => {
+
+  const navigate = useNavigate();
 
   const user = JSON.parse(
     localStorage.getItem("user")
   );
 
-  return (
-    <div className="profile-box">
+  const initials =
+  user?.username
+    ?.split(" ")
+    .map(word => word[0])
+    .join("")
+    .substring(0, 2)
+    .toUpperCase();
 
-      <img
-        src="https://i.pravatar.cc/100"
-        alt="profile"
-      />
+  return (
+
+    <div
+      className="profile-box"
+      style={{
+        cursor: "pointer"
+      }}
+      onClick={() => navigate("/profile")}
+    >
+
+      <div
+        className="profile-initials"
+      >
+        {initials}
+      </div>
 
       <div>
 
         <h5>
-          {user ? user.username : "User"}
+          {user?.username || "User"}
         </h5>
 
         <p>
@@ -25,7 +45,9 @@ const ProfileMenu = () => {
       </div>
 
     </div>
+
   );
+
 };
 
 export default ProfileMenu;

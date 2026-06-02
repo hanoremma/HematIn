@@ -19,6 +19,37 @@ const BudgetForm = ({
 
 }) => {
 
+  const handleAmountChange = (e) => {
+
+    const value =
+      e.target.value.replace(
+        /\D/g,
+        ""
+      );
+
+    handleChange({
+
+      target: {
+
+        name: "amountLimit",
+
+        value
+
+      }
+
+    });
+
+  };
+
+  const formatNumber = (value) => {
+
+    if (!value) return "";
+
+    return Number(value)
+      .toLocaleString("id-ID");
+
+  };
+
   console.log(
     "FORM CATEGORY:",
     categories
@@ -111,7 +142,7 @@ const BudgetForm = ({
       <div className="form-group">
 
         <label>
-          Category
+          Kategori
         </label>
 
         <select
@@ -126,7 +157,7 @@ const BudgetForm = ({
 
           <option value="">
 
-            Select Category
+            Pilih Kategori
 
           </option>
 
@@ -171,7 +202,7 @@ const BudgetForm = ({
 
         <input
 
-          type="number"
+          type="text"
 
           name="amountLimit"
 
@@ -180,11 +211,13 @@ const BudgetForm = ({
           "
 
           value={
-            formData.amountLimit
+            formatNumber(
+              formData.amountLimit
+            )
           }
 
           onChange={
-            handleChange
+            handleAmountChange
           }
 
           min="0"

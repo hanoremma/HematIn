@@ -11,27 +11,28 @@ const BudgetItem = ({
     Number(limit);
 
   const percent =
-    limitAmount > 0
-      ? Math.round(
-          (usedAmount /
-            limitAmount) * 100
-        )
-      : 0;
+  limitAmount > 0
+    ? Math.round(
+        (usedAmount / limitAmount) * 100
+      )
+    : 0;
 
-  const progressWidth =
-    Math.min(percent, 100);
+const progressWidth = Math.min(percent, 100);
 
-  const remaining =
-    limitAmount - usedAmount;
+const remaining = limitAmount - usedAmount;
 
-  const status =
-  percent > 100
+const status =
+  percent >= 100
     ? "Over Budget"
+    : percent >= 80
+    ? "Hampir Habis"
     : "Aman";
 
 const statusClass =
-  percent > 100
+  percent >= 100
     ? "danger"
+    : percent >= 80
+    ? "warning"
     : "safe";
 
   return (

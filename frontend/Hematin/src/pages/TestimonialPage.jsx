@@ -12,7 +12,7 @@ const TestimonialPage = () => {
           <Row className="mb-5">
             <Col>
             <h1 className="text-center fw-bold">Testimonial</h1>
-            <p className="text-center">Lorem ipsum dolor sit amet consectetur</p>
+            <p className="text-center">Berikut adalah beberapa testimonial dari pengguna Hematin yang telah merasakan manfaat dari aplikasi ini.</p>
             </Col>
           </Row>
           <Row className="row-cols-lg-3 row-cols-1">

@@ -226,7 +226,7 @@ const BudgetPage = () => {
 
           <h2>Budgets</h2>
 
-          <p>Kelola budget keuangan</p>
+          <p>Kelola anggaran keuangan</p>
 
           </div>
 

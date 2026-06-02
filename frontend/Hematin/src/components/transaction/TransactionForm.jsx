@@ -181,7 +181,7 @@ const formatNumber = (value) => {
       <div className="form-group">
 
         <label>
-          Transaction Type
+          Tipe Transaksi
         </label>
 
         <TransactionTypeToggle
@@ -200,13 +200,13 @@ const formatNumber = (value) => {
       <div className="form-group">
 
         <label>
-          Amount
+          Jumlah
         </label>
 
         <input
           type="text"
           name="amount"
-          placeholder="Enter amount"
+          placeholder="Masukkan jumlah transaksi"
           value={
             formatNumber(formData.amount)}
           onChange={handleAmountChange}
@@ -220,13 +220,13 @@ const formatNumber = (value) => {
       <div className="form-group">
 
         <label>
-          Description
+          Deskripsi
         </label>
 
         <input
           type="text"
           name="description"
-          placeholder="Description"
+          placeholder="Masukkan deskripsi transaksi"
           value={formData.description}
           onChange={handleChange}
           required
@@ -239,7 +239,7 @@ const formatNumber = (value) => {
       <div className="form-group">
 
         <label>
-          Transaction Date
+          Tanggal Transaksi
         </label>
 
         <input
@@ -270,7 +270,7 @@ const formatNumber = (value) => {
         >
 
           <option value="">
-            Select Wallet
+            Pilih Wallet
           </option>
 
           {wallets.length > 0 ? (
@@ -305,7 +305,7 @@ const formatNumber = (value) => {
       <div className="form-group">
 
         <label>
-          Category
+          Kategori
         </label>
 
         <select
@@ -316,7 +316,7 @@ const formatNumber = (value) => {
         >
 
           <option value="">
-            Select Category
+            Pilih Kategori
           </option>
 
           {categories.length > 0 ? (
@@ -337,7 +337,7 @@ const formatNumber = (value) => {
           ) : (
 
             <option disabled>
-              Category belum tersedia
+              Kategori belum tersedia
             </option>
 
           )}
