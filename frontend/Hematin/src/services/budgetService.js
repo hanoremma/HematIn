@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_URL =
-  "http://localhost:3000/budget";
+const API_URL = `${import.meta.env.VITE_API_URL}/budget`;
 
 const normalizeBudgets = (data) => {
   if (Array.isArray(data)) return data;

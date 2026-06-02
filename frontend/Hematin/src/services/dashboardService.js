@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_URL =
-  "http://localhost:3000/dashboard";
+const API_URL = `${import.meta.env.VITE_API_URL}/dashboard`;
 
 /* =========================
    GET DASHBOARD CARD
