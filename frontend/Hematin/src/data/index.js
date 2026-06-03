@@ -3,8 +3,8 @@ import FitureImage2  from "../assets/fiture/fiture 2.jpg";
 import FitureImage3 from "../assets/fiture/fiture 3.jpg";
 import FitureImage4 from "../assets/fiture/fiture 4.jpg";
 
-import People1 from "../assets/testimonial/profile.jpg";
-import People2 from "../assets/testimonial/profile2.jpg";
+import People1 from "../assets/testimonial/Profile.jpg";
+import People2 from "../assets/testimonial/Profile2.jpg";
 
 export const navLinks = [
   {
