@@ -42,7 +42,9 @@ const getCategoryByUser =
       `
       SELECT *
       FROM category
-      WHERE id_user = $1
+      WHERE
+        id_user = $1
+        AND is_deleted = FALSE
       ORDER BY category_name ASC
       `,
 
@@ -89,7 +91,10 @@ const deleteCategory = async (id_category) => {
   return await pool.query(
 
     `
-    DELETE FROM category
+    UPDATE category
+    SET
+      is_deleted = TRUE,
+      deleted_at = NOW()
     WHERE id_category = $1
     `,
 

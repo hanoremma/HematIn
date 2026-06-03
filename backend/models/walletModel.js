@@ -47,7 +47,9 @@ const getWalletByUser = async (id_user) => {
     `
     SELECT *
     FROM wallet
-    WHERE id_user = $1
+    WHERE
+      id_user = $1
+      AND is_deleted = FALSE
     ORDER BY wallet_created_at DESC
     `,
 
@@ -101,7 +103,10 @@ const deleteWallet = async (id_wallet) => {
   return await pool.query(
 
     `
-    DELETE FROM wallet
+    UPDATE wallet
+    SET
+      is_deleted = TRUE,
+      deleted_at = NOW()
     WHERE id_wallet = $1
     `,
 

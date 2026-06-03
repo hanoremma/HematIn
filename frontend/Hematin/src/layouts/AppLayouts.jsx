@@ -1,7 +1,7 @@
 import AppNavbar from "../components/application/AppNavbar";
 import AppSidebar from "../components/application/AppSidebar";
 
-import "../dist/css/dashboard.css";
+import "../styles/css/dashboard.css";
 
 import { Outlet } from "react-router-dom";
 

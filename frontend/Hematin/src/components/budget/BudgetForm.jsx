@@ -1,7 +1,7 @@
 import TransactionTypeToggle
 from "../transaction/TransactionTypeToggle";
 
-import "../../dist/css/Transaction.css";
+import "../../styles/css/Transaction.css";
 
 const BudgetForm = ({
 

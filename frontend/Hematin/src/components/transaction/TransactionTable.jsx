@@ -1,4 +1,4 @@
-import "../../dist/css/Transaction.css";
+import "../../styles/css/Transaction.css";
 
 const TransactionTable = ({
   transactions,

@@ -10,7 +10,7 @@ import {
   getWallets
 } from "../../services/walletService";
 
-import "../../dist/css/Transaction.css";
+import "../../styles/css/Transaction.css";
 
 const TransactionForm = ({
   formData,
