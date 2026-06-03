@@ -120,7 +120,7 @@ crypto
             Klik tombol di bawah untuk verifikasi akun:
           </p>
       
-          <a href="http://localhost:3000/auth/verify/${verificationToken}">
+          <a href="http://202.10.34.136:3000/auth/verify/${verificationToken}">
             Verifikasi Email
           </a>
         `
