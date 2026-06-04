@@ -16,4 +16,4 @@
 
 ### Halaman Beranda
 
-![Halaman Beranda](https://github.com/Thoru213/HematIn/main/Assets/beranda.jpeg)
+![Halaman Beranda]([https://github.com/Thoru213/HematIn/main/Assets/beranda.jpeg](https://github.com/Thoru213/HematIn/blob/main/Assets/beranda.jpeg)
