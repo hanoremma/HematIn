@@ -9,6 +9,7 @@ import {
 const ReceiptModal = ({
   show,
   onClose,
+  onScanSuccess,
 }) => {
 
   const [
@@ -96,12 +97,27 @@ const ReceiptModal = ({
           result
         );
 
-        alert(
-          "Struk berhasil diupload"
-        );
-
         setReceiptImage(null);
         setImageFile(null);
+
+        // Ekstrak prefill data dari ocr_result
+        if (onScanSuccess && result?.data?.ocr_result) {
+          const ocr =
+            typeof result.data.ocr_result === "string"
+              ? JSON.parse(result.data.ocr_result)
+              : result.data.ocr_result;
+
+          const description =
+            ocr.items?.length > 0
+              ? ocr.items.map((i) => i.name).join(", ")
+              : "";
+
+          onScanSuccess({
+            amount: Math.round(ocr.total_expense ?? 0).toString(),
+            description,
+            suggestedCategoryName: ocr.classification?.category ?? "",
+          });
+        }
 
         onClose();
 

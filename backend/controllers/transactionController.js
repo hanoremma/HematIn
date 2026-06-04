@@ -408,13 +408,15 @@ const editTransaction =
 
       }
 
+      const walletIdsToLock = [
+        oldTransaction.id_wallet,
+        id_wallet
+      ].filter(Boolean); // buang null (transaksi Scan tanpa wallet)
+
       const walletMap =
         await lockWallets(
           client,
-          [
-            oldTransaction.id_wallet,
-            id_wallet
-          ]
+          walletIdsToLock
         );
 
       if (!walletMap) {
@@ -432,10 +434,12 @@ const editTransaction =
       }
 
       const oldDelta =
-        getBalanceDelta(
-          oldTransaction.transaction_type,
-          oldTransaction.amount
-        );
+        oldTransaction.id_wallet
+          ? getBalanceDelta(
+              oldTransaction.transaction_type,
+              oldTransaction.amount
+            )
+          : 0; // Scan lama tanpa wallet — tidak ada balance yang perlu di-reverse
 
       const newDelta =
         getBalanceDelta(
@@ -446,12 +450,14 @@ const editTransaction =
       const balanceChanges =
         new Map();
 
-      balanceChanges.set(
-        oldTransaction.id_wallet,
-        (balanceChanges.get(
-          oldTransaction.id_wallet
-        ) || 0) - oldDelta
-      );
+      if (oldTransaction.id_wallet) {
+        balanceChanges.set(
+          oldTransaction.id_wallet,
+          (balanceChanges.get(
+            oldTransaction.id_wallet
+          ) || 0) - oldDelta
+        );
+      }
 
       balanceChanges.set(
         id_wallet,

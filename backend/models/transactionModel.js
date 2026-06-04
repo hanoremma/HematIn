@@ -34,6 +34,7 @@ const createTransaction = async (
     )
 
     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+    RETURNING *
     `,
 
     [
@@ -68,10 +69,10 @@ const getTransactionByUser = async (id_user) => {
 
     FROM transactions t
 
-    JOIN wallet w
+    LEFT JOIN wallet w
     ON t.id_wallet = w.id_wallet
 
-    JOIN category c
+    LEFT JOIN category c
     ON t.id_category = c.id_category
 
     WHERE t.id_user = $1

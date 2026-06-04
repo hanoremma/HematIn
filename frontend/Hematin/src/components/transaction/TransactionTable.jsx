@@ -69,7 +69,7 @@ const TransactionTable = ({
                 </td>
 
                 <td>
-                  {item.wallet_name}
+                  {item.wallet_name ?? "-"}
                 </td>
 
                 <td>

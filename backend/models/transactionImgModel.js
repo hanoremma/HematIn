@@ -75,6 +75,7 @@ const updateTransactionImageStatus = async (
     UPDATE transaction_img
     SET status = $1
     WHERE id_transaction_img = $2
+    RETURNING *
     `,
     [
       status,
@@ -94,6 +95,7 @@ const updateTransactionImageResult = async (
     UPDATE transaction_img
     SET ocr_result = $1
     WHERE id_transaction_img = $2
+    RETURNING *
     `,
     [
       JSON.stringify(ocr_result),
@@ -103,11 +105,38 @@ const updateTransactionImageResult = async (
 
 }
 
+const updateTransactionImage = async (
+  id_transaction_img,
+  id_transaction,
+  ocr_result,
+  status
+) => {
+
+  return pool.query(
+    `
+    UPDATE transaction_img
+    SET
+      id_transaction = $1,
+      ocr_result = $2,
+      status = $3
+    WHERE id_transaction_img = $4
+    RETURNING *
+    `,
+    [
+      id_transaction,
+      JSON.stringify(ocr_result),
+      status,
+      id_transaction_img
+    ]
+  );
+};
+
 module.exports = {
 
   createTransactionImage,
   getTransactionImage,
   updateTransactionImageStatus,
-  updateTransactionImageResult
+  updateTransactionImageResult,
+  updateTransactionImage
 
 }

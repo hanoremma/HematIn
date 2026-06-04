@@ -18,6 +18,7 @@ const TransactionForm = ({
   handleTypeChange,
   handleSubmit,
   isEdit = false,
+  suggestedCategoryName = "",
 }) => {
 
   /* =========================
@@ -118,6 +119,30 @@ const formatNumber = (value) => {
     fetchCategories();
 
   }, [user?.id_user]);
+
+  // Auto-select kategori dari hasil OCR
+  useEffect(() => {
+    if (
+      !suggestedCategoryName ||
+      categories.length === 0 ||
+      formData.category
+    ) return;
+
+    const match = categories.find(
+      (c) =>
+        c.category_name.toLowerCase() ===
+        suggestedCategoryName.toLowerCase()
+    );
+
+    if (match) {
+      handleChange({
+        target: {
+          name: "category",
+          value: match.id_category,
+        },
+      });
+    }
+  }, [categories, suggestedCategoryName]);
 
   /* =========================
      FETCH WALLET
