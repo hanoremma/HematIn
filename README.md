@@ -10,6 +10,8 @@
 
 ## 📷 Demo Tampilan
 
-### Halaman Beranda
+### 🖥️ Halaman Beranda
 
 ![Halaman Beranda](https://github.com/Thoru213/HematIn/blob/main/Assets/beranda.jpeg)
+
+### Halaman Transaksi
