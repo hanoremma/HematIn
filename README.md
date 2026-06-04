@@ -1,6 +1,6 @@
 # 💰 Hematin
 
-**Health Guard** adalah aplikasi manajemen keuangan pribadi yang membantu pengguna mencatat pemasukan, pengeluaran, mengelola wallet, mengatur budget, melihat analitik keuangan, serta melakukan scan struk menggunakan OCR untuk otomatisasi pencatatan transaksi.
+**Hematind** adalah aplikasi manajemen keuangan pribadi yang membantu pengguna mencatat pemasukan, pengeluaran, mengelola wallet, mengatur budget, melihat analitik keuangan, serta melakukan scan struk menggunakan OCR untuk otomatisasi pencatatan transaksi.
 
 ---
 
@@ -16,4 +16,4 @@
 
 ### Halaman Beranda
 
-![Halaman Beranda]([https://github.com/Thoru213/HematIn/main/Assets/beranda.jpeg](https://github.com/Thoru213/HematIn/blob/main/Assets/beranda.jpeg)
+![Halaman Beranda](https://github.com/Thoru213/HematIn/blob/main/Assets/beranda.jpeg)
