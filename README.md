@@ -12,4 +12,4 @@
 
 ### Landing Page / Dashboard Utama
 
-![Dashboard]
+![Dashboard](https://raw.githubusercontent.com/Thoru213/HematIn/main/Assets/LandingPage.jpeg)
