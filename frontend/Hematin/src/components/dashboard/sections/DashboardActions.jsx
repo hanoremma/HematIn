@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import Modal from "../../ui/Modal";
 
@@ -320,8 +321,8 @@ useEffect(() => {
         payload
       );
 
-      alert(
-        "Budget Saved!"
+      toast.success(
+        "Budget berhasil ditambahkan"
       );
 
       setShowBudget(false);
@@ -354,18 +355,30 @@ useEffect(() => {
 
       console.log(error);
 
-      alert(
-
-        error?.response?.data?.message
-        ||
-
+      toast.error(
+        error?.response?.data?.message ||
         "Gagal tambah budget"
-
       );
 
     }
 
 };
+
+  const handleReceiptSuccess = async () => {
+    if (user?.id_user) {
+      const latestTransactions =
+        await getTransactions(
+          user.id_user
+        );
+
+      setTransactions?.(
+        latestTransactions
+      );
+    }
+
+    await refreshDashboard?.();
+  };
+
   return (
     <>
       {/* =========================
@@ -423,7 +436,11 @@ useEffect(() => {
           RECEIPT MODAL
       ========================= */}
 
-      <ReceiptModal show={showReceipt} onClose={() => setShowReceipt(false)} />
+      <ReceiptModal
+        show={showReceipt}
+        onClose={() => setShowReceipt(false)}
+        onUploadSuccess={handleReceiptSuccess}
+      />
     </>
   );
 };

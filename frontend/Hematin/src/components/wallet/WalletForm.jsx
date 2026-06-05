@@ -13,6 +13,28 @@ const WalletForm = ({
   const [walletTypes, setWalletTypes] =
     useState([]);
 
+  const handleBalanceChange = (e) => {
+    const value =
+      e.target.value.replace(
+        /\D/g,
+        ""
+      );
+
+    handleChange({
+      target: {
+        name: "balance",
+        value
+      }
+    });
+  };
+
+  const formatNumber = (value) => {
+    if (!value) return "";
+
+    return Number(value)
+      .toLocaleString("id-ID");
+  };
+
   useEffect(() => {
 
     const fetchTypes = async () => {
@@ -94,12 +116,12 @@ const WalletForm = ({
         </label>
 
         <input
-          type="number"
+          type="text"
+          inputMode="numeric"
           name="balance"
           placeholder={isEdit ? "Enter balance" : "Isi saldo awal"}
-          value={formData.balance}
-          onChange={handleChange}
-          min="0"
+          value={formatNumber(formData.balance)}
+          onChange={handleBalanceChange}
           required
         />
 

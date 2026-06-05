@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 import Modal from "../ui/Modal";
 
@@ -10,6 +11,7 @@ const ReceiptModal = ({
   show,
   onClose,
   onScanSuccess,
+  onUploadSuccess,
 }) => {
 
   const [
@@ -27,60 +29,53 @@ const ReceiptModal = ({
     setLoading
   ] = useState(false);
 
+  const setReceiptFile = (file) => {
+    if (!file) return;
+
+    setImageFile(file);
+    setReceiptImage(
+      URL.createObjectURL(file)
+    );
+  };
+
   const handleReceiptUpload =
     (e) => {
-
-      const file =
-        e.target.files[0];
-
-      if (file) {
-
-        setImageFile(file);
-
-        setReceiptImage(
-          URL.createObjectURL(file)
-        );
-
-      }
-
+      setReceiptFile(
+        e.target.files[0]
+      );
     };
 
   const handleDrop = (e) => {
-
     e.preventDefault();
-
-    const file =
-      e.dataTransfer.files[0];
-
-    if (file) {
-
-      setImageFile(file);
-
-      setReceiptImage(
-        URL.createObjectURL(file)
-      );
-
-    }
-
+    setReceiptFile(
+      e.dataTransfer.files[0]
+    );
   };
 
   const handleDragOver = (e) => {
-
     e.preventDefault();
+  };
 
+  const resetReceipt = () => {
+    setReceiptImage(null);
+    setImageFile(null);
+  };
+
+  const handleClose = () => {
+    if (loading) return;
+
+    resetReceipt();
+    onClose();
   };
 
   const handleScan =
     async () => {
 
       if (!imageFile) {
-
-        alert(
+        toast.error(
           "Pilih gambar terlebih dahulu"
         );
-
         return;
-
       }
 
       try {
@@ -97,26 +92,40 @@ const ReceiptModal = ({
           result
         );
 
-        setReceiptImage(null);
-        setImageFile(null);
+        try {
+          await onUploadSuccess?.(
+            result
+          );
+        } catch (successCallbackError) {
+          console.log(successCallbackError);
+        }
 
-        // Ekstrak prefill data dari ocr_result
+        toast.success(
+          "Struk berhasil diproses"
+        );
+
+        resetReceipt();
+
         if (onScanSuccess && result?.data?.ocr_result) {
-          const ocr =
-            typeof result.data.ocr_result === "string"
-              ? JSON.parse(result.data.ocr_result)
-              : result.data.ocr_result;
+          try {
+            const ocr =
+              typeof result.data.ocr_result === "string"
+                ? JSON.parse(result.data.ocr_result)
+                : result.data.ocr_result;
 
-          const description =
-            ocr.items?.length > 0
-              ? ocr.items.map((i) => i.name).join(", ")
-              : "";
+            const description =
+              ocr.items?.length > 0
+                ? ocr.items.map((item) => item.name).join(", ")
+                : "";
 
-          onScanSuccess({
-            amount: Math.round(ocr.total_expense ?? 0).toString(),
-            description,
-            suggestedCategoryName: ocr.classification?.category ?? "",
-          });
+            onScanSuccess({
+              amount: Math.round(ocr.total_expense ?? 0).toString(),
+              description,
+              suggestedCategoryName: ocr.classification?.category ?? "",
+            });
+          } catch (parseError) {
+            console.log(parseError);
+          }
         }
 
         onClose();
@@ -125,7 +134,8 @@ const ReceiptModal = ({
 
         console.error(error);
 
-        alert(
+        toast.error(
+          error?.response?.data?.message ||
           "Upload gagal"
         );
 
@@ -141,76 +151,89 @@ const ReceiptModal = ({
 
     <Modal
       show={show}
-      onClose={() => {
-
-        setReceiptImage(null);
-        setImageFile(null);
-
-        onClose();
-
-      }}
+      onClose={handleClose}
     >
 
       <div className="receipt-upload">
 
-        <h3>
-          Upload Struk Anda
-        </h3>
+        {loading ? (
 
-        <p>
-          Upload gambar struk transaksi.
-        </p>
+          <div className="receipt-processing">
 
-        <label
-          className="custom-file-upload"
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-        >
+            <div className="receipt-spinner" />
 
-          <input
-            type="file"
-            accept=".jpg,.jpeg,.png"
-            onChange={
-              handleReceiptUpload
-            }
-          />
+            <h3>
+              Tunggu sebentar
+            </h3>
 
-          <div className="upload-content">
-
-            {
-              receiptImage ? (
-
-                <div className="receipt-preview">
-
-                  <img
-                    src={receiptImage}
-                    alt="preview"
-                  />
-
-                </div>
-
-              ) : (
-
-                <>
-                  <div className="upload-icon">
-                    <i className="bi bi-receipt"></i>
-                  </div>
-
-                  <h4>
-                    Pilih atau Drop File
-                  </h4>
-
-                  <p>
-                    JPG, PNG • Maksimal 10 MB
-                  </p>
-                </>
-
-              )
-            }
+            <p>
+              Struk sedang diproses. Transaksi akan otomatis ditambahkan setelah selesai.
+            </p>
 
           </div>
 
-        </label>
+        ) : (
+
+          <>
+
+            <h3>
+              Upload Struk Anda
+            </h3>
+
+            <p>
+              Upload gambar struk transaksi.
+            </p>
+
+            <label
+              className="custom-file-upload"
+              onDrop={handleDrop}
+              onDragOver={handleDragOver}
+            >
+
+              <input
+                type="file"
+                accept=".jpg,.jpeg,.png"
+                onChange={handleReceiptUpload}
+              />
+
+              <div className="upload-content">
+
+                {receiptImage ? (
+
+                  <div className="receipt-preview">
+
+                    <img
+                      src={receiptImage}
+                      alt="preview"
+                    />
+
+                  </div>
+
+                ) : (
+
+                  <>
+                    <div className="upload-icon">
+                      <i className="bi bi-receipt"></i>
+                    </div>
+
+                    <h4>
+                      Pilih atau Drop File
+                    </h4>
+
+                    <p>
+                      JPG, PNG - Maksimal 10 MB
+                    </p>
+                  </>
+
+                )}
+
+              </div>
+
+            </label>
+
+          </>
+
+        )}
 
         <button
           className="upload-btn"
@@ -218,11 +241,9 @@ const ReceiptModal = ({
           disabled={loading}
         >
 
-          {
-            loading
-              ? "Uploading..."
-              : "Upload Struk"
-          }
+          {loading
+            ? "Memproses..."
+            : "Upload Struk"}
 
         </button>
 

@@ -92,24 +92,6 @@ const TransactionPage = () => {
       category: "",
     });
 
-  const [suggestedCategoryName,
-    setSuggestedCategoryName] =
-    useState("");
-
-  const handleScanSuccess = (prefill) => {
-    setFormData((prev) => ({
-      ...prev,
-      transactionType: "Pengeluaran",
-      amount: prefill.amount,
-      description: prefill.description,
-      transactionDate: "",
-      wallet: "",
-      category: "",
-    }));
-    setSuggestedCategoryName(prefill.suggestedCategoryName);
-    setShowTransaction(true);
-  };
-
     /* =========================
    FETCH TRANSACTIONS
 ========================= */
@@ -599,7 +581,6 @@ const handleConfirmDelete =
           handleTypeChange={handleTypeChange}
           handleSubmit={handleSubmit}
           isEdit={isEdit}
-          suggestedCategoryName={suggestedCategoryName}
         />
 
       </Modal>
@@ -611,7 +592,7 @@ const handleConfirmDelete =
         onClose={() =>
           setShowReceipt(false)
         }
-        onScanSuccess={handleScanSuccess}
+        onUploadSuccess={fetchTransactions}
       />
 
       <ConfirmModal

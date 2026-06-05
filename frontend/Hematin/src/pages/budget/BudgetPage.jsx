@@ -36,6 +36,19 @@ const EMPTY_FORM = {
   endDate: "",
 };
 
+const formatDateForInput = (value) => {
+  if (!value) return "";
+
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
+
 const BudgetPage = () => {
 
   const user = JSON.parse(
@@ -137,12 +150,8 @@ const BudgetPage = () => {
       descriptionBudget: budget.description_budget,
       category: budget.id_category,
       amountLimit: budget.amount_limit,
-      startDate: budget.start_date
-        ? budget.start_date.slice(0, 10)
-        : "",
-      endDate: budget.end_date
-        ? budget.end_date.slice(0, 10)
-        : "",
+      startDate: formatDateForInput(budget.start_date),
+      endDate: formatDateForInput(budget.end_date),
     });
     setShowModal(true);
   };

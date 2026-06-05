@@ -156,6 +156,35 @@
     background-color: #d97706;
 }
 
+.upload-btn:disabled{
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.receipt-processing{
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.receipt-spinner{
+    width: 52px;
+    height: 52px;
+    border: 5px solid rgba(245, 158, 11, 0.2);
+    border-top-color: #f59e0b;
+    border-radius: 50%;
+    animation: receipt-spin 0.9s linear infinite;
+}
+
+@keyframes receipt-spin{
+    to{
+        transform: rotate(360deg);
+    }
+}
+
 .upload-info{
     display: block;
 

@@ -215,16 +215,25 @@ if (!file) {
       const newTransaction = transactionResult.rows[0];
 
       // ── 5. Update transaction_img: simpan ocr_result + id_transaction ──
-      const finalRow = await updateTransactionImage(
-        result.rows[0].id_transaction_img,
-        newTransaction.id_transaction,
-        ocr,
-        'success'
-      );
+      let imageRow = result.rows[0];
+
+      try {
+        const finalRow = await updateTransactionImage(
+          result.rows[0].id_transaction_img,
+          newTransaction.id_transaction,
+          ocr,
+          'success'
+        );
+
+        imageRow = finalRow.rows[0];
+      } catch (imageError) {
+        console.log("TRANSACTION IMAGE UPDATE ERROR");
+        console.log(imageError);
+      }
 
       return res.json({
         message: 'Transaction image berhasil ditambahkan',
-        data: finalRow.rows[0],
+        data: imageRow,
         transaction: newTransaction,
         image_url: signedUrlData.signedUrl,
       });
